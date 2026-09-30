@@ -1,154 +1,728 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BPS LOGISTICS | Admin Panel</title>
-<style>
-:root{--navy:#071426;--navy2:#0d2039;--gold:#e2b84f;--gold2:#f6df93;--ink:#182235;--muted:#64748b;--line:#e7eaf0;--bg:#f3f5f9;--white:#fff;--green:#15803d;--red:#b91c1c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(120deg,var(--navy),#102b4c);color:#fff;padding:20px clamp(16px,4vw,44px);border-bottom:3px solid var(--gold)}
-.brand{display:flex;align-items:center;gap:14px}.mark{width:48px;height:48px;border:2px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:19px}.brand h1{margin:0;font-size:clamp(20px,3vw,28px);letter-spacing:1.5px}.brand p{margin:2px 0 0;color:#d6deea;font-size:12px;letter-spacing:2px}
-.wrap{max-width:1400px;margin:auto;padding:24px clamp(12px,3vw,32px) 40px}.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.topline h2{margin:0;font-size:23px}.sub{color:var(--muted);font-size:13px}.tag{border:1px solid #e5cf88;background:#fff8df;color:#78580c;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:700}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.panel{background:var(--white);border:1px solid var(--line);border-radius:15px;box-shadow:0 5px 18px #14213b08}.stat{padding:17px}.stat small{display:block;color:var(--muted);font-weight:600}.stat strong{display:block;font-size:25px;margin-top:7px}.green{color:var(--green)}.red{color:var(--red)}
-.panel{padding:20px;margin-bottom:18px}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:15px}.panel h3{margin:0;font-size:17px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;color:#475569;font-weight:700}.field input,.field select{width:100%;min-width:0;padding:10px 11px;border:1px solid #d9dee8;border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:14px;outline:none}.field input:focus,.field select:focus{border-color:#bd922b;box-shadow:0 0 0 3px #e2b84f30}.section{grid-column:1/-1;color:#9b741a;font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;border-bottom:1px solid var(--line);padding:8px 0 5px;margin-top:5px}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:9px;padding:10px 15px;font-weight:700;font-size:13px;cursor:pointer}.primary{background:var(--navy2);color:#fff}.gold{background:var(--gold);color:#211a08}.light{background:#eef1f6;color:#243047}.danger{background:#fee2e2;color:#991b1b}.btn:hover{filter:brightness(.96)}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar input{padding:9px 12px;border:1px solid #d9dee8;border-radius:9px;min-width:min(280px,70vw);font:inherit}
-.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;min-width:900px;background:#fff}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:top}th{background:#f8f9fc;color:#475569;text-transform:uppercase;letter-spacing:.5px;font-size:10px;position:sticky;top:0}td strong{font-size:12px}.pill{display:inline-block;border-radius:20px;padding:4px 8px;background:#e8f0ff;color:#1d4ed8;font-weight:700;font-size:10px}.file-note{font-size:11px;color:#64748b}.foot{font-size:12px;color:var(--muted);line-height:1.6}.empty{text-align:center;color:var(--muted);padding:30px}
-@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:20px}.grid{grid-template-columns:1fr}.panel{padding:14px}.wrap{padding-top:16px}.brand p{letter-spacing:1px}}
 
-.login-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#061326,#123354);display:grid;place-items:center;padding:18px}.login-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:28px;box-shadow:0 24px 70px #0005;border-top:4px solid var(--gold);color:var(--ink)}.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:20px}.login-brand .mark{background:var(--navy);flex-shrink:0}.login-card h2{margin:0;color:var(--navy);font-size:23px}.login-card p{margin:4px 0 18px;color:var(--muted);font-size:13px}.login-card .field{margin:12px 0}.login-error{color:#b91c1c;font-size:12px;min-height:18px;margin-top:8px}.login-note{margin-top:15px;padding:10px;background:#fff8df;border-radius:8px;color:#76570c;font-size:11px;line-height:1.5}.logout{background:#243b57;color:#fff}
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f5f9;color:#182235;font:15px Arial,sans-serif}
+header{background:#071426;color:white;padding:18px}
+.wrap{max-width:1400px;margin:auto;padding:20px}
+.card{background:white;border-radius:12px;padding:20px;margin-bottom:18px;box-shadow:0 2px 10px #0001}
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ccd3df;border-radius:8px}
+textarea{min-height:70px}
+button{border:0;border-radius:8px;padding:11px 16px;font-weight:bold;cursor:pointer}
+.primary{background:#071426;color:white}
+.gold{background:#e2b84f;color:#071426}
+.danger{background:#c62828;color:white}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat strong{display:block;font-size:25px;margin-top:7px}
+table{width:100%;border-collapse:collapse;min-width:1000px}
+th,td{padding:10px;border-bottom:1px solid #e5e8ee;text-align:left}
+.tablewrap{overflow:auto}
+.hidden{display:none!important}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.loginbox{width:420px;max-width:100%;background:white;padding:30px;border-radius:16px;box-shadow:0 10px 35px #0002}
+h1,h2,h3{margin-top:0}
+.msg{margin:12px 0;padding:10px;border-radius:8px;background:#fff3cd}
+.small{font-size:13px;color:#64748b}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:900px){.grid,.formgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid,.formgrid{grid-template-columns:1fr}}
 </style>
 </head>
+
 <body>
-<div class="login-screen" id="loginScreen"><form class="login-card" id="loginForm"><div class="login-brand"><div class="mark">BPS</div><div><h2>BPS LOGISTICS</h2><div class="tag">ADMIN PANEL LOGIN</div></div></div><p>Sign in to open the logistics dashboard.</p><div class="field"><label for="loginId">Admin ID</label><input id="loginId" autocomplete="username" required placeholder="Enter Admin ID"></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Enter password"></div><button class="btn primary" style="width:100%;margin-top:8px" type="submit">Login to Admin Panel</button><div class="login-error" id="loginError" aria-live="polite"></div><div class="login-note"><b>Demo access:</b> ID <b>BPSADMIN</b> · Password <b>Bps@12345</b><br>This browser-only demo login is not secure for a public website. Do not use real customer data until server-side authentication and a protected database are configured.</div></form></div>
 
-<header><div class="brand"><div class="mark">BPS</div><div><h1>BPS LOGISTICS</h1><p>PAN INDIA SERVICE • FAST • SAFE • RELIABLE</p></div></div></header>
-<main class="wrap">
-<div class="topline"><div><h2>Admin Dashboard</h2><div class="sub">Booking, vendor and finance overview</div></div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="tag">ADMIN DEMO • LOCAL DATA ONLY</span><button class="btn logout" id="logoutBtn" type="button">Logout</button></div></div>
-<section class="stats">
-<div class="stat"><small>Total Bookings</small><strong id="sCount">0</strong></div>
-<div class="stat"><small>Booking Revenue</small><strong id="sRevenue">₹0.00</strong></div>
-<div class="stat"><small>Vendor + Other Expense</small><strong id="sExpense">₹0.00</strong></div>
-<div class="stat"><small>Net Profit / Loss</small><strong id="sProfit">₹0.00</strong></div>
-</section>
-<section class="panel">
-<div class="panelhead"><h3>＋ New Booking</h3><span class="sub">Fill sender, receiver and shipment details</span></div>
-<form id="bookingForm">
-<div class="grid">
-<div class="section">From — Sender Details</div>
-<div class="field"><label for="fromName">Sender Name *</label><input id="fromName" required maxlength="100" placeholder="Sender / company name"></div>
-<div class="field"><label for="fromMobile">Mobile Number *</label><input id="fromMobile" required maxlength="20" placeholder="Mobile number"></div>
-<div class="field"><label for="fromPin">PIN Code</label><input id="fromPin" maxlength="10" placeholder="PIN code"></div>
-<div class="field"><label for="fromCity">City</label><input id="fromCity" maxlength="80" placeholder="City"></div>
-<div class="field" style="grid-column:span 2"><label for="fromAddress">Full Address</label><input id="fromAddress" maxlength="250" placeholder="House, street, area"></div>
-<div class="field"><label for="fromState">State</label><input id="fromState" maxlength="80" placeholder="State"></div>
-<div class="section">To — Receiver Details</div>
-<div class="field"><label for="toName">Receiver Name *</label><input id="toName" required maxlength="100" placeholder="Receiver / company name"></div>
-<div class="field"><label for="toMobile">Mobile Number *</label><input id="toMobile" required maxlength="20" placeholder="Mobile number"></div>
-<div class="field"><label for="toPin">PIN Code</label><input id="toPin" maxlength="10" placeholder="PIN code"></div>
-<div class="field"><label for="toCity">City</label><input id="toCity" maxlength="80" placeholder="City"></div>
-<div class="field" style="grid-column:span 2"><label for="toAddress">Full Address</label><input id="toAddress" maxlength="250" placeholder="House, street, area"></div>
-<div class="field"><label for="toState">State</label><input id="toState" maxlength="80" placeholder="State"></div>
-<div class="section">Shipment & Vendor</div>
-<div class="field"><label for="bookDate">Booking Date</label><input id="bookDate" type="date" required></div>
-<div class="field"><label for="boxes">No. of Boxes</label><input id="boxes" type="number" min="0" step="1" value="1"></div>
-<div class="field"><label for="weight">Weight (KG)</label><input id="weight" type="number" min="0" step=".01" value="0"></div>
-<div class="field"><label for="vendor">Vendor Name *</label><select id="vendor" required><option value="">Select vendor</option><option>DP World</option><option>XpressBees</option><option>Ekart</option><option>TCI Express</option><option>Rivigo</option><option>Delhivery</option><option>Safexpress</option><option>Blue Dart</option><option>DTDC</option><option>Allcargo (Gati)</option><option>Amazon</option><option>India Post</option><option>Other Transport / Logistics</option></select></div>
-<div class="field"><label for="lr">Vendor LR / Tracking No.</label><input id="lr" maxlength="80" placeholder="LR / tracking number"></div>
-<div class="field"><label for="status">Booking Status</label><select id="status"><option>Booked</option><option>Pickup Pending</option><option>Picked Up</option><option>In Transit</option><option>Out for Delivery</option><option>Delivered</option><option>Hold</option><option>Returned</option><option>Cancelled</option></select></div>
-<div class="section">Booking Amount & Expense (INR)</div>
-<div class="field"><label for="amount">Customer Booking Amount (₹) *</label><input id="amount" type="number" min="0" step=".01" required value="0"></div>
-<div class="field"><label for="vendorCost">Vendor Expense (₹)</label><input id="vendorCost" type="number" min="0" step=".01" value="0"></div>
-<div class="field"><label for="otherCost">Other Expense (₹)</label><input id="otherCost" type="number" min="0" step=".01" value="0"></div>
-<div class="field"><label for="customerPaid">Customer Paid (₹)</label><input id="customerPaid" type="number" min="0" step=".01" value="0"></div>
-<div class="field"><label for="vendorPaid">Vendor Paid (₹)</label><input id="vendorPaid" type="number" min="0" step=".01" value="0"></div>
-<div class="field"><label for="lrFile">LR Copy (PDF / Image)</label><input id="lrFile" type="file" accept="application/pdf,image/*"><span class="file-note" id="lrFileNote">Optional local demo attachment, max 1 MB.</span></div>
-<div class="field"><label for="gstin">Customer GSTIN (optional)</label><input id="gstin" maxlength="20" placeholder="GSTIN"></div>
-<div class="field"><label>Estimated Profit / Loss</label><input id="preview" readonly value="₹0.00"></div>
+<!-- LOGIN -->
+<div id="loginPage" class="login">
+  <div class="loginbox">
+    <h1>BPS LOGISTICS</h1>
+    <p><b>Admin Login</b></p>
+    <p class="small">OTP will be sent to the authorized mobile number.</p>
+
+    <label>Mobile Number</label>
+    <input id="phone" type="tel" value="+918609636690" readonly>
+
+    <div id="recaptcha-container" style="margin:15px 0"></div>
+
+    <button id="sendOtpBtn" class="primary" style="width:100%">
+      SEND OTP
+    </button>
+
+    <div id="otpArea" class="hidden" style="margin-top:15px">
+      <label>Enter OTP</label>
+      <input id="otp" type="text" inputmode="numeric" maxlength="6"
+             placeholder="6 digit OTP">
+
+      <button id="verifyBtn" class="gold" style="width:100%;margin-top:10px">
+        VERIFY OTP & LOGIN
+      </button>
+    </div>
+
+    <div id="loginMsg"></div>
+  </div>
 </div>
-<div class="actions"><button class="btn primary" id="saveBookingBtn" type="submit">Save Booking</button><button class="btn danger" id="cancelEditBtn" type="button" style="display:none">Cancel Edit</button><button class="btn light" type="reset" id="resetBtn">Clear Form</button></div>
-</form>
-</section>
-<section class="panel">
-<div class="panelhead"><div><h3>All Bookings</h3><div class="sub">Search and export the records saved in this browser</div></div><div class="toolbar"><input id="search" placeholder="Search docket, sender, receiver, vendor..."><button class="btn gold" id="exportBtn" type="button">Export CSV</button><button class="btn light" id="backupBtn" type="button">Backup JSON</button><button class="btn light" id="restoreBtn" type="button">Restore JSON</button><button class="btn light" id="reportBtn" type="button">Reports CSV</button><button class="btn light" id="passwordBtn" type="button">Change Password</button><input id="restoreFile" type="file" accept=".json,application/json" hidden></div></div>
-<div class="tablewrap"><table><thead><tr><th>Docket / Date</th><th>From</th><th>To</th><th>Vendor / LR</th><th>Boxes / KG</th><th>Status</th><th>Booking ₹</th><th>Expense ₹</th><th>Profit/Loss ₹</th><th>Customer Due ₹</th><th>Vendor Due ₹</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty">No bookings yet. Add your first booking above.</div></div>
-</section>
-<p class="foot"><b>Important:</b> This is a browser-only demo. Records and LR files stay in this browser/device. Login and password change are not secure server authentication. WhatsApp opens a prefilled draft and does not send automatically. Reports export CSV; use Print / Save PDF for PDF. QR image requires internet; barcode is a visual docket label. Automatic cloud backup, shared multi-device data, automated SMS and production-grade secure login require a backend. Do not use real customer data until those protections are deployed.</p>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden">
+
+<header>
+  <div class="wrap topline">
+    <div>
+      <h2>BPS LOGISTICS</h2>
+      <div>Admin Dashboard</div>
+    </div>
+    <button id="logoutBtn" class="danger">LOGOUT</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="grid">
+  <div class="card stat">
+    <div>Total Bookings</div>
+    <strong id="totalBookings">0</strong>
+  </div>
+
+  <div class="card stat">
+    <div>Booking Revenue</div>
+    <strong id="totalRevenue">₹0</strong>
+  </div>
+
+  <div class="card stat">
+    <div>Vendor + Other Expense</div>
+    <strong id="totalExpense">₹0</strong>
+  </div>
+
+  <div class="card stat">
+    <div>Net Profit / Loss</div>
+    <strong id="netProfit">₹0</strong>
+  </div>
+</div>
+
+<!-- NEW BOOKING -->
+<div class="card">
+<h2>New Booking</h2>
+
+<div class="formgrid">
+
+<div>
+<label>Customer Name</label>
+<input id="customerName" placeholder="Customer name">
+</div>
+
+<div>
+<label>Customer Phone</label>
+<input id="customerPhone" placeholder="Mobile number">
+</div>
+
+<div>
+<label>Booking Date</label>
+<input id="bookingDate" type="date">
+</div>
+
+<div>
+<label>Courier Partner</label>
+<select id="courier">
+<option value="">Select Courier</option>
+<option>Delhivery</option>
+<option>DTDC</option>
+<option>Blue Dart</option>
+<option>Ecom Express</option>
+<option>XpressBees</option>
+<option>Ekart</option>
+<option>India Post</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>AWB / Tracking Number</label>
+<input id="awb" placeholder="Tracking number">
+</div>
+
+<div>
+<label>Material / Item</label>
+<input id="material" placeholder="Material">
+</div>
+
+<div>
+<label>Quantity</label>
+<input id="quantity" type="number" min="1" value="1">
+</div>
+
+<div>
+<label>Booking Revenue</label>
+<input id="revenue" type="number" min="0" value="0">
+</div>
+
+<div>
+<label>Vendor / Other Expense</label>
+<input id="expense" type="number" min="0" value="0">
+</div>
+
+<div>
+<label>Material Status</label>
+<select id="status">
+<option>Booked</option>
+<option>Picked Up</option>
+<option>In Transit</option>
+<option>Out for Delivery</option>
+<option>Delivered</option>
+<option>Hold</option>
+<option>Cancelled</option>
+<option>Returned</option>
+</select>
+</div>
+
+<div style="grid-column:1/-1">
+<label>Notes</label>
+<textarea id="notes" placeholder="Additional notes"></textarea>
+</div>
+
+</div>
+
+<div class="actions" style="margin-top:15px">
+<button id="saveBtn" class="primary">SAVE BOOKING</button>
+<button id="clearBtn">CLEAR</button>
+</div>
+
+<div id="bookingMsg"></div>
+</div>
+
+<!-- BOOKINGS -->
+<div class="card">
+<div class="topline">
+<h2>Customer & Booking Details</h2>
+<input id="search" style="max-width:350px" placeholder="Search customer / AWB / courier">
+</div>
+
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Customer</th>
+<th>Phone</th>
+<th>Courier</th>
+<th>AWB</th>
+<th>Material</th>
+<th>Qty</th>
+<th>Revenue</th>
+<th>Expense</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="bookingTable"></tbody>
+</table>
+</div>
+</div>
+
 </main>
-<script>
-const DEMO_ADMIN_ID='BPSADMIN';let DEMO_ADMIN_PASSWORD=localStorage.getItem('bps_demo_password')||'Bps@12345';const loginScreen=document.getElementById('loginScreen');document.getElementById('loginForm').addEventListener('submit',function(e){e.preventDefault();const id=document.getElementById('loginId').value.trim();const pw=document.getElementById('loginPassword').value;if(id===DEMO_ADMIN_ID&&pw===DEMO_ADMIN_PASSWORD){loginScreen.style.display='none';document.getElementById('loginError').textContent='';}else{document.getElementById('loginError').textContent='Incorrect Admin ID or password. Please try again.';}});document.getElementById('logoutBtn').addEventListener('click',function(){loginScreen.style.display='grid';document.getElementById('loginPassword').value='';document.getElementById('loginId').value='';});
+</div>
 
-const $=id=>document.getElementById(id);
-const STORE='bps_logistics_demo_v1';
-let bookings=[];
-try{bookings=JSON.parse(localStorage.getItem(STORE)||'[]');if(!Array.isArray(bookings))bookings=[];}catch(e){bookings=[];}
-const money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const dateNow=new Date();$('bookDate').value=[dateNow.getFullYear(),String(dateNow.getMonth()+1).padStart(2,'0'),String(dateNow.getDate()).padStart(2,'0')].join('-');
-function profit(){return Number($('amount').value||0)-Number($('vendorCost').value||0)-Number($('otherCost').value||0)}
-function preview(){const p=profit();$('preview').value=(p<0?'Loss: ':'Profit: ')+money(Math.abs(p));$('preview').style.color=p<0?'#b91c1c':'#15803d'}
-['amount','vendorCost','otherCost'].forEach(id=>$(id).addEventListener('input',preview));
-function persist(){localStorage.setItem(STORE,JSON.stringify(bookings));render()}
-function render(){
- const revenue=bookings.reduce((a,b)=>a+Number(b.amount||0),0),expense=bookings.reduce((a,b)=>a+Number(b.vendorCost||0)+Number(b.otherCost||0),0),net=revenue-expense;
- $('sCount').textContent=bookings.length.toLocaleString('en-IN');$('sRevenue').textContent=money(revenue);$('sExpense').textContent=money(expense);$('sProfit').textContent=(net<0?'−':'')+money(Math.abs(net));$('sProfit').className=net<0?'red':'green';
- const q=$('search').value.toLowerCase().trim();const filtered=bookings.filter(b=>[b.id,b.date,b.fromName,b.fromMobile,b.fromCity,b.fromPin,b.toName,b.toMobile,b.toCity,b.toPin,b.vendor,b.lr,b.status].join(' ').toLowerCase().includes(q));
- $('rows').innerHTML=filtered.map(b=>{const ex=Number(b.vendorCost||0)+Number(b.otherCost||0),p=Number(b.amount||0)-ex,cd=Math.max(0,Number(b.amount||0)-Number(b.customerPaid||0)),vd=Math.max(0,Number(b.vendorCost||0)-Number(b.vendorPaid||0));return `<tr><td><strong>${esc(b.id)}</strong><br>${esc(b.date)}</td><td><strong>${esc(b.fromName)}</strong><br>${esc(b.fromCity)} ${esc(b.fromPin)}<br>${esc(b.fromMobile)}</td><td><strong>${esc(b.toName)}</strong><br>${esc(b.toCity)} ${esc(b.toPin)}<br>${esc(b.toMobile)}</td><td>${esc(b.vendor)}<br>${esc(b.lr||'—')} ${b.lrData?'📎':''}</td><td>${esc(b.boxes)} / ${esc(b.weight)}</td><td><span class="pill">${esc(b.status)}</span></td><td>${money(b.amount)}</td><td>${money(ex)}</td><td style="font-weight:800;color:${p<0?'#b91c1c':'#15803d'}">${p<0?'−':''}${money(Math.abs(p))}</td><td>${money(cd)}</td><td>${money(vd)}</td><td><div style="display:flex;gap:5px;flex-wrap:wrap"><button class="btn light" onclick="editBooking('${esc(b.id)}')">Edit</button><button class="btn gold" onclick="downloadDocket('${esc(b.id)}')">Docket</button><button class="btn light" onclick="printDocket('${esc(b.id)}')">Print/PDF</button><button class="btn light" onclick="downloadLR('${esc(b.id)}')">LR Copy</button><button class="btn light" onclick="sendWhatsApp('${esc(b.id)}')">WhatsApp</button><button class="btn light" onclick="showInvoice('${esc(b.id)}')">GST Invoice</button><button class="btn danger" onclick="removeBooking('${esc(b.id)}')">Delete</button></div></td></tr>`}).join('');$('empty').style.display=filtered.length?'none':'block';
-}
-function getBooking(id){return bookings.find(b=>b.id===id)}
-function docketMarkup(b){
- const ex=Number(b.vendorCost||0)+Number(b.otherCost||0),p=Number(b.amount||0)-ex;
- const row=(label,value)=>`<div class="item"><span>${label}</span><b>${esc(value||'—')}</b></div>`;
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(b.id)} - BPS LOGISTICS Docket</title>
- <style>*{box-sizing:border-box}body{font:14px Arial,sans-serif;color:#142238;margin:0;padding:24px;background:#eef1f5}.sheet{max-width:850px;margin:auto;background:white;border:2px solid #d4a83d;padding:26px}.head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #d4a83d;padding-bottom:15px}.brand{font-size:27px;font-weight:900;letter-spacing:1px;color:#0b1c32}.tag{font-size:11px;letter-spacing:2px;color:#80611a}.doc{font-weight:bold;color:#80611a;border:1px solid #d4a83d;padding:9px 12px}.meta{display:flex;justify-content:space-between;gap:10px;margin:16px 0}.sections{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{border:1px solid #d9dee8;border-radius:8px;padding:14px}.card h3{margin:0 0 10px;color:#a0781d;font-size:13px;letter-spacing:1px}.item{display:flex;gap:10px;justify-content:space-between;border-bottom:1px solid #edf0f4;padding:6px 0}.item span{color:#64748b}.item b{text-align:right;overflow-wrap:anywhere}.full{grid-column:1/-1}.money{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.money div{background:#f6f7fa;padding:12px;border-radius:7px}.money span{display:block;color:#64748b;font-size:11px}.money b{display:block;margin-top:5px;font-size:16px}.foot{margin-top:24px;border-top:1px solid #ddd;padding-top:12px;display:flex;justify-content:space-between;color:#64748b;font-size:11px}.sign{margin-top:38px;display:flex;justify-content:space-between}.sign span{border-top:1px solid #64748b;padding-top:7px;width:170px;text-align:center;font-size:11px}@media(max-width:600px){body{padding:0}.sheet{padding:14px;border-width:1px}.sections{grid-template-columns:1fr}.full{grid-column:auto}.money{grid-template-columns:repeat(2,1fr)}.meta{flex-wrap:wrap}}@media print{body{background:white;padding:0}.sheet{border:1px solid #d4a83d;max-width:none;margin:0;min-height:100vh;break-inside:avoid}.no-print{display:none!important}}</style></head><body><main class="sheet">
- <div class="head"><div><div class="brand">BPS LOGISTICS</div><div class="tag">PAN INDIA SERVICE • FAST • SAFE • RELIABLE</div></div><div class="doc">SHIPPING DOCKET</div></div>
- <div class="meta"><div><b>Docket No:</b> ${esc(b.id)}</div><div><b>Booking Date:</b> ${esc(b.date)}</div><div><b>Status:</b> ${esc(b.status)}</div></div>
- <div class="sections">
- <section class="card"><h3>FROM — SENDER</h3>${row('Name',b.fromName)}${row('Mobile',b.fromMobile)}${row('Address',b.fromAddress)}${row('PIN Code',b.fromPin)}${row('City',b.fromCity)}${row('State',b.fromState)}</section>
- <section class="card"><h3>TO — RECEIVER</h3>${row('Name',b.toName)}${row('Mobile',b.toMobile)}${row('Address',b.toAddress)}${row('PIN Code',b.toPin)}${row('City',b.toCity)}${row('State',b.toState)}</section>
- <section class="card full"><h3>SHIPMENT & VENDOR DETAILS</h3><div class="sections">${row('Vendor',b.vendor)}${row('LR / Tracking No.',b.lr)}${row('Number of Boxes',b.boxes)}${row('Weight (KG)',b.weight)}${row('Customer Paid',money(b.customerPaid))}${row('Customer Due',money(Math.max(0,Number(b.amount||0)-Number(b.customerPaid||0))))}${row('GSTIN',b.gstin)}${b.lrData?`<div class=\"item\"><span>LR Copy</span><b><a href=\"${b.lrData.data}\" download=\"${esc(b.lrData.name)}\">Open LR</a></b></div>`:''}</div></section>
- </div><div class="money"><div><span>Booking Amount</span><b>₹${Number(b.amount||0).toFixed(2)}</b></div><div><span>Vendor Expense</span><b>₹${Number(b.vendorCost||0).toFixed(2)}</b></div><div><span>Other Expense</span><b>₹${Number(b.otherCost||0).toFixed(2)}</b></div><div><span>Profit / Loss</span><b style="color:${p<0?'#b91c1c':'#15803d'}">${p<0?'Loss':'Profit'} ₹${Math.abs(p).toFixed(2)}</b></div></div>
- <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:15px"><div><b>Docket Barcode</b><div style="font-family:monospace;font-size:13px;letter-spacing:2px;margin:6px 0">${esc(b.id)}</div><div style="height:35px;width:230px;background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 4px,#111 4px 5px,transparent 5px 8px)"></div></div><div style="text-align:center"><b>QR Docket ID</b><br><img alt="QR" width="90" height="90" src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=${encodeURIComponent(b.id)}"></div></div><div class="sign"><span>Sender Signature</span><span>Authorized Signature</span></div><div class="foot"><span>BPS LOGISTICS — Admin Booking Record</span><span>Computer generated docket</span></div>
- <div class="no-print" style="margin-top:18px;text-align:center"><button onclick="window.print()" style="padding:10px 18px;background:#0d2039;color:#fff;border:0;border-radius:6px;font-weight:bold;cursor:pointer">Print / Save as PDF</button></div>
- </main></body></html>`;
-}
-function downloadDocket(id){
- const b=getBooking(id);if(!b){alert('Booking not found.');return;}
- const blob=new Blob([docketMarkup(b)],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
- a.href=url;a.download=`${b.id}-BPS-Docket.html`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-function printDocket(id){
- const b=getBooking(id);if(!b){alert('Booking not found.');return;}
- const w=window.open('','_blank');if(!w){alert('Please allow pop-ups for this site, then try again.');return;}
- w.document.open();w.document.write(docketMarkup(b));w.document.close();w.focus();setTimeout(()=>w.print(),300);
-}
-window.downloadDocket=downloadDocket;window.printDocket=printDocket;
-function removeBooking(id){if(confirm('Delete booking '+id+'?')){bookings=bookings.filter(b=>b.id!==id);persist()}}
-window.removeBooking=removeBooking;
-let editingId=null;
-function todayISO(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
-function cancelEdit(){editingId=null;$('saveBookingBtn').textContent='Save Booking';$('cancelEditBtn').style.display='none'}
-$('cancelEditBtn').addEventListener('click',()=>{cancelEdit();$('bookingForm').reset();$('bookDate').value=todayISO();$('boxes').value=1;$('lrFileNote').textContent='Optional local demo attachment, max 1 MB.';preview()});
-$('bookingForm').addEventListener('submit',async e=>{e.preventDefault();let lrData=null;const f=$('lrFile').files[0];if(f){if(f.size>1048576){alert('LR file must be 1 MB or smaller in this demo.');return}lrData=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve({name:f.name,type:f.type,data:r.result});r.onerror=reject;r.readAsDataURL(f)})}
- const old=editingId?bookings.find(x=>x.id===editingId):null,id=old?old.id:'BPS-'+Date.now();const b={id,date:$('bookDate').value,fromName:$('fromName').value.trim(),fromMobile:$('fromMobile').value.trim(),fromPin:$('fromPin').value.trim(),fromCity:$('fromCity').value.trim(),fromAddress:$('fromAddress').value.trim(),fromState:$('fromState').value.trim(),toName:$('toName').value.trim(),toMobile:$('toMobile').value.trim(),toPin:$('toPin').value.trim(),toCity:$('toCity').value.trim(),toAddress:$('toAddress').value.trim(),toState:$('toState').value.trim(),boxes:$('boxes').value,weight:$('weight').value,vendor:$('vendor').value,lr:$('lr').value.trim(),status:$('status').value,amount:Number($('amount').value),vendorCost:Number($('vendorCost').value),otherCost:Number($('otherCost').value),customerPaid:Number($('customerPaid').value||0),vendorPaid:Number($('vendorPaid').value||0),gstin:$('gstin').value.trim(),lrData:lrData||(old?old.lrData:null)};
- if(old)bookings=bookings.map(x=>x.id===id?b:x);else bookings.unshift(b);try{persist()}catch(err){alert('Storage full. Export backup or use a smaller LR attachment.');return}cancelEdit();e.target.reset();$('bookDate').value=todayISO();$('boxes').value=1;$('weight').value=0;$('amount').value=0;$('vendorCost').value=0;$('otherCost').value=0;$('customerPaid').value=0;$('vendorPaid').value=0;preview();alert((old?'Booking updated: ':'Booking saved: ')+id)});
-function editBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;editingId=id;const map={date:'bookDate'};['date','fromName','fromMobile','fromPin','fromCity','fromAddress','fromState','toName','toMobile','toPin','toCity','toAddress','toState','boxes','weight','vendor','lr','status','amount','vendorCost','otherCost','customerPaid','vendorPaid','gstin'].forEach(k=>{const el=$(map[k]||k);if(el)el.value=b[k]??''});$('lrFile').value='';$('lrFileNote').textContent=b.lrData?'Existing LR: '+b.lrData.name:'No LR attached';$('saveBookingBtn').textContent='Update Booking';$('cancelEditBtn').style.display='inline-block';$('bookingForm').scrollIntoView({behavior:'smooth'});preview()}
-function downloadLR(id){const b=bookings.find(x=>x.id===id);if(!b||!b.lrData){alert('No LR copy attached to this booking.');return}const a=document.createElement('a');a.href=b.lrData.data;a.download=b.lrData.name;a.click()}
-function sendWhatsApp(id){const b=bookings.find(x=>x.id===id);if(!b)return;const msg=`BPS LOGISTICS update\nDocket: ${b.id}\nReceiver: ${b.toName}\nStatus: ${b.status}\nLR: ${b.lr||'N/A'}`;const phone=String(b.toMobile||'').replace(/\D/g,'');window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(msg),'_blank','noopener')}
-window.editBooking=editBooking;window.downloadLR=downloadLR;window.sendWhatsApp=sendWhatsApp;
-function showInvoice(id){const b=bookings.find(x=>x.id===id);if(!b)return;const total=Number(b.amount||0);const win=window.open('','_blank');if(!win){alert('Allow pop-ups to print invoice.');return}win.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>BPS GST Invoice ${esc(b.id)}</title><style>body{font:14px Arial;padding:24px;color:#172338}.sheet{max-width:800px;margin:auto;border:1px solid #b8bec8;padding:24px}h1{color:#0d2039}table{width:100%;border-collapse:collapse;margin:20px 0}td,th{border:1px solid #cbd0d8;padding:10px;text-align:left}.right{text-align:right}@media print{button{display:none}}</style></head><body><main class="sheet"><h1>BPS LOGISTICS</h1><h2>GST INVOICE / TAX INVOICE</h2><p><b>Invoice/Docket:</b> ${esc(b.id)} &nbsp; <b>Date:</b> ${esc(b.date)}</p><p><b>Bill To:</b> ${esc(b.fromName)}<br>${esc(b.fromAddress)} ${esc(b.fromCity)} ${esc(b.fromPin)} ${esc(b.fromState)}<br>Mobile: ${esc(b.fromMobile)}<br>GSTIN: ${esc(b.gstin||'Not provided')}</p><p><b>Consignee:</b> ${esc(b.toName)} — ${esc(b.toCity)} ${esc(b.toPin)}</p><table><tr><th>Description</th><th>LR No.</th><th class="right">Amount</th></tr><tr><td>Logistics / Transport Service</td><td>${esc(b.lr||'—')}</td><td class="right">₹${total.toFixed(2)}</td></tr><tr><th colspan="2">Total</th><th class="right">₹${total.toFixed(2)}</th></tr></table><p>GST rate, SAC/HSN, place of supply and tax split must be entered/verified by your accountant for the applicable service. This demo does not calculate statutory GST.</p><p style="margin-top:55px;text-align:right">Authorized Signatory</p><button onclick="window.print()">Print / Save PDF</button></main></body></html>`);win.document.close();win.focus()};window.showInvoice=showInvoice;
+<script type="module">
 
-$('reportBtn').addEventListener('click',()=>{const period=(prompt('Report period: daily, monthly, or yearly','monthly')||'').toLowerCase();if(!['daily','monthly','yearly'].includes(period)){if(period)alert('Please enter daily, monthly, or yearly.');return}const key=b=>period==='daily'?b.date:period==='monthly'?(b.date||'').slice(0,7):(b.date||'').slice(0,4),g={};bookings.forEach(b=>{const k=key(b)||'Unknown';g[k]??={n:0,r:0,e:0};g[k].n++;g[k].r+=Number(b.amount||0);g[k].e+=Number(b.vendorCost||0)+Number(b.otherCost||0)});const data=[['Period','Bookings','Revenue','Expense','Profit/Loss'],...Object.keys(g).sort().map(k=>[k,g[k].n,g[k].r,g[k].e,g[k].r-g[k].e])];const csv=data.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='BPS-'+period+'-report.csv';a.click()});
-$('passwordBtn').addEventListener('click',()=>{const old=prompt('Enter current demo password');if(old!==DEMO_ADMIN_PASSWORD){alert('Current password incorrect');return}const pw=prompt('Enter new password (minimum 8 characters)');if(!pw||pw.length<8){alert('Password must be at least 8 characters');return}DEMO_ADMIN_PASSWORD=pw;localStorage.setItem('bps_demo_password',pw);alert('Demo password changed in this browser. This is not secure server-side authentication.')});
-$('search').addEventListener('input',render);
-$('exportBtn').addEventListener('click',()=>{if(!bookings.length){alert('No booking records to export.');return;}const keys=['id','date','fromName','fromMobile','fromAddress','fromPin','fromCity','fromState','toName','toMobile','toAddress','toPin','toCity','toState','boxes','weight','vendor','lr','status','amount','vendorCost','otherCost','customerPaid','vendorPaid','gstin'];const csv=[keys.join(','),...bookings.map(b=>keys.map(k=>'"'+String(b[k]??'').replaceAll('"','""')+'"').join(','))].join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='BPS-Logistics-Bookings.csv';a.click();URL.revokeObjectURL(a.href)});
-$('backupBtn').addEventListener('click',()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(bookings,null,2)],{type:'application/json'}));a.download='BPS-Logistics-Backup.json';a.click();URL.revokeObjectURL(a.href)});
-$('restoreBtn').addEventListener('click',()=>$('restoreFile').click());
-$('restoreFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data)||!data.every(x=>x&&typeof x.id==='string'))throw Error();if(confirm('Replace current browser records with backup file?')){bookings=data;persist();alert('Backup restored.');}}catch(err){alert('Invalid backup file.');}e.target.value='';});
-$('resetBtn').addEventListener('click',()=>setTimeout(preview,0));
-render();preview();
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {const firebaseConfig = {
+  apiKey: "AIzaSyDtgJSh3RoQWUgd_T_LPvGRB_XhQFMr4N08",
+  authDomain: "bps-logistics.firebaseapp.com",
+  projectId: "bps-logistics",
+  storageBucket: "bps-logistics.firebasestorage.app",
+  messagingSenderId: "887063405025",
+  appId: "1:887063405025:web:8c95f1c540c11a5c0672a0",
+  measurementId: "G-EFDV8T81C8"
+};
+  apiKey: "AIzaSyDtgJSh3RoQWUgdT_LPvGRB_XhQFMr4N08",
+  authDomain: "bps-logistics.firebaseapp.com",
+  projectId: "bps-logistics",
+  storageBucket: "bps-logistics.firebasestorage.app",
+  messagingSenderId: "887063405025",
+  appId: "1:887063405025:web:8c95f1c540c11a5c0672a0",
+  measurementId: "G-EFDV8T81C8"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const ADMIN_PHONE = "+918609636690";
+
+let confirmationResult = null;
+let recaptchaVerifier = null;
+let editingId = null;
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function showMessage(text, type="info"){
+  const box = document.getElementById("loginMsg");
+  box.className = "msg";
+  box.textContent = text;
+}
+
+function setupRecaptcha(){
+  if(recaptchaVerifier) return;
+
+  recaptchaVerifier = new RecaptchaVerifier(
+    auth,
+    "recaptcha-container",
+    {
+      size: "normal"
+    }
+  );
+
+  recaptchaVerifier.render();
+}
+
+setupRecaptcha();
+
+
+document.getElementById("sendOtpBtn").addEventListener("click", async ()=>{
+
+  try{
+
+    showMessage("Sending OTP...");
+
+    const phone = document.getElementById("phone").value.trim();
+
+    confirmationResult =
+      await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
+
+    document.getElementById("otpArea").classList.remove("hidden");
+
+    showMessage("OTP sent successfully. Check your mobile.");
+
+  }catch(error){
+
+    console.error(error);
+
+    let msg = error.message || "Unable to send OTP.";
+
+    if(error.code === "auth/too-many-requests"){
+      msg = "Too many attempts. Please wait and try again.";
+    }
+
+    if(error.code === "auth/quota-exceeded"){
+      msg = "Firebase SMS daily quota exceeded.";
+    }
+
+    showMessage(msg);
+
+    try{
+      recaptchaVerifier.clear();
+      recaptchaVerifier = null;
+      setupRecaptcha();
+    }catch(e){}
+
+  }
+
+});
+
+
+document.getElementById("verifyBtn").addEventListener("click", async ()=>{
+
+  try{
+
+    const code = document.getElementById("otp").value.trim();
+
+    if(!confirmationResult){
+      showMessage("Please request OTP first.");
+      return;
+    }
+
+    if(!code){
+      showMessage("Enter the OTP.");
+      return;
+    }
+
+    const result = await confirmationResult.confirm(code);
+
+    const user = result.user;
+
+    if(user.phoneNumber !== ADMIN_PHONE){
+
+      await signOut(auth);
+
+      showMessage("Access denied. This number is not authorized.");
+      return;
+    }
+
+    showDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+    if(error.code === "auth/invalid-verification-code"){
+      showMessage("Wrong OTP. Please enter the correct OTP.");
+    }
+    else if(error.code === "auth/code-expired"){
+      showMessage("OTP expired. Please request a new OTP.");
+    }
+    else{
+      showMessage(error.message || "OTP verification failed.");
+    }
+
+  }
+
+});
+
+
+onAuthStateChanged(auth, user=>{
+
+  if(user && user.phoneNumber === ADMIN_PHONE){
+    showDashboard();
+  }
+
+});
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function showDashboard(){
+
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  renderBookings();
+}
+
+
+document.getElementById("logoutBtn").addEventListener("click", async ()=>{
+  await signOut(auth);
+  location.reload();
+});
+
+
+/* =========================
+   BOOKING DATA
+========================= */
+
+function getBookings(){
+  return JSON.parse(localStorage.getItem("bpsBookings") || "[]");
+}
+
+function saveBookings(data){
+  localStorage.setItem("bpsBookings", JSON.stringify(data));
+}
+
+function getValue(id){
+  return document.getElementById(id).value.trim();
+}
+
+function clearForm(){
+
+  editingId = null;
+
+  [
+    "customerName",
+    "customerPhone",
+    "bookingDate",
+    "awb",
+    "material",
+    "notes"
+  ].forEach(id=>{
+    document.getElementById(id).value = "";
+  });
+
+  document.getElementById("courier").value = "";
+  document.getElementById("quantity").value = "1";
+  document.getElementById("revenue").value = "0";
+  document.getElementById("expense").value = "0";
+  document.getElementById("status").value = "Booked";
+
+  document.getElementById("saveBtn").textContent = "SAVE BOOKING";
+}
+
+
+document.getElementById("clearBtn").addEventListener("click", clearForm);
+
+
+document.getElementById("saveBtn").addEventListener("click", ()=>{
+
+  const name = getValue("customerName");
+
+  if(!name){
+    document.getElementById("bookingMsg").textContent =
+      "Customer name is required.";
+    return;
+  }
+
+  const data = getBookings();
+
+  const booking = {
+
+    id: editingId || Date.now(),
+
+    customerName: name,
+    customerPhone: getValue("customerPhone"),
+    bookingDate: getValue("bookingDate"),
+    courier: getValue("courier"),
+    awb: getValue("awb"),
+    material: getValue("material"),
+    quantity: Number(getValue("quantity")) || 0,
+    revenue: Number(getValue("revenue")) || 0,
+    expense: Number(getValue("expense")) || 0,
+    status: getValue("status"),
+    notes: getValue("notes")
+
+  };
+
+  if(editingId){
+
+    const index = data.findIndex(x=>x.id === editingId);
+
+    if(index !== -1){
+      data[index] = booking;
+    }
+
+  }else{
+
+    data.push(booking);
+
+  }
+
+  saveBookings(data);
+
+  document.getElementById("bookingMsg").textContent =
+    editingId ? "Booking updated." : "Booking saved.";
+
+  clearForm();
+  renderBookings();
+
+});
+
+
+/* =========================
+   TABLE
+========================= */
+
+function renderBookings(){
+
+  const tbody = document.getElementById("bookingTable");
+  const search = document.getElementById("search").value.toLowerCase();
+
+  let data = getBookings();
+
+  data = data.filter(b=>{
+
+    const text = [
+      b.customerName,
+      b.customerPhone,
+      b.courier,
+      b.awb,
+      b.material,
+      b.status
+    ].join(" ").toLowerCase();
+
+    return text.includes(search);
+
+  });
+
+  tbody.innerHTML = "";
+
+  data.forEach(b=>{
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${escapeHtml(b.bookingDate)}</td>
+      <td>${escapeHtml(b.customerName)}</td>
+      <td>${escapeHtml(b.customerPhone)}</td>
+      <td>${escapeHtml(b.courier)}</td>
+      <td>${escapeHtml(b.awb)}</td>
+      <td>${escapeHtml(b.material)}</td>
+      <td>${b.quantity}</td>
+      <td>₹${b.revenue}</td>
+      <td>₹${b.expense}</td>
+      <td>
+        <select data-status="${b.id}">
+          ${statusOptions(b.status)}
+        </select>
+      </td>
+      <td>
+        <button data-edit="${b.id}">Edit</button>
+        <button class="danger" data-delete="${b.id}">Delete</button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+  document.querySelectorAll("[data-status]").forEach(el=>{
+
+    el.addEventListener("change", ()=>{
+
+      const id = Number(el.dataset.status);
+      const data = getBookings();
+
+      const item = data.find(x=>x.id === id);
+
+      if(item){
+        item.status = el.value;
+        saveBookings(data);
+        renderBookings();
+      }
+
+    });
+
+  });
+
+
+  document.querySelectorAll("[data-edit]").forEach(el=>{
+
+    el.addEventListener("click", ()=>{
+
+      const id = Number(el.dataset.edit);
+      editBooking(id);
+
+    });
+
+  });
+
+
+  document.querySelectorAll("[data-delete]").forEach(el=>{
+
+    el.addEventListener("click", ()=>{
+
+      const id = Number(el.dataset.delete);
+
+      if(confirm("Delete this booking?")){
+
+        const data = getBookings().filter(x=>x.id !== id);
+
+        saveBookings(data);
+        renderBookings();
+
+      }
+
+    });
+
+  });
+
+
+  updateStats();
+
+}
+
+
+function statusOptions(current){
+
+  const statuses = [
+    "Booked",
+    "Picked Up",
+    "In Transit",
+    "Out for Delivery",
+    "Delivered",
+    "Hold",
+    "Cancelled",
+    "Returned"
+  ];
+
+  return statuses.map(s=>
+    `<option ${s===current ? "selected" : ""}>${s}</option>`
+  ).join("");
+
+}
+
+
+function editBooking(id){
+
+  const b = getBookings().find(x=>x.id === id);
+
+  if(!b) return;
+
+  editingId = id;
+
+  document.getElementById("customerName").value = b.customerName;
+  document.getElementById("customerPhone").value = b.customerPhone;
+  document.getElementById("bookingDate").value = b.bookingDate;
+  document.getElementById("courier").value = b.courier;
+  document.getElementById("awb").value = b.awb;
+  document.getElementById("material").value = b.material;
+  document.getElementById("quantity").value = b.quantity;
+  document.getElementById("revenue").value = b.revenue;
+  document.getElementById("expense").value = b.expense;
+  document.getElementById("status").value = b.status;
+  document.getElementById("notes").value = b.notes;
+
+  document.getElementById("saveBtn").textContent = "UPDATE BOOKING";
+
+  window.scrollTo({
+    top: 500,
+    behavior: "smooth"
+  });
+
+}
+
+
+document.getElementById("search").addEventListener("input", renderBookings);
+
+
+function updateStats(){
+
+  const data = getBookings();
+
+  const revenue =
+    data.reduce((sum,b)=>sum + Number(b.revenue || 0),0);
+
+  const expense =
+    data.reduce((sum,b)=>sum + Number(b.expense || 0),0);
+
+  document.getElementById("totalBookings").textContent =
+    data.length;
+
+  document.getElementById("totalRevenue").textContent =
+    "₹" + revenue.toLocaleString("en-IN");
+
+  document.getElementById("totalExpense").textContent =
+    "₹" + expense.toLocaleString("en-IN");
+
+  document.getElementById("netProfit").textContent =
+    "₹" + (revenue-expense).toLocaleString("en-IN");
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
 </script>
+
 </body>
 </html>
