@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPS LOGISTICS - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111827;
+        }
+
+        .login-box {
+            width: 380px;
+            max-width: 90%;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: #2563eb;
+            font-size: 34px;
+        }
+
+        .logo p {
+            color: #6b7280;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #error {
+            color: #dc2626;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="logo">
+            <h1>BPS</h1>
+            <p>LOGISTICS</p>
+        </div>
+
+        <form id="loginForm">
+
+            <label for="username">Admin ID</label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter Admin ID"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+                LOGIN
+            </button>
+
+            <div id="error">
+                Invalid Admin ID or Password
+            </div>
+
+        </form>
+
+        <div class="footer">
+            © 2026 BPS LOGISTICS
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const ADMIN_ID = "bpsadmin";
+        const ADMIN_PASSWORD = "BPS@1234";
+
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            if (
+                username === ADMIN_ID &&
+                password === ADMIN_PASSWORD
+            ) {
+
+                sessionStorage.setItem("bpsLoggedIn", "true");
+
+                window.location.href = "index.html";
+
+            } else {
+
+                document.getElementById("error").style.display = "block";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
