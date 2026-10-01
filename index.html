@@ -3,231 +3,459 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>BPS LOGISTICS</title>
 
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:#f3f6fa;
-  color:#172033
+  color:#172033;
 }
-.hidden{display:none!important}
+
+.hidden{
+  display:none!important;
+}
+
+button{
+  cursor:pointer;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  border:1px solid #ccd5df;
+  border-radius:6px;
+  font-size:14px;
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#0879d1;
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+/* ================= LOGIN ================= */
 
 .loginPage{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:20px;
+
   background:
-    linear-gradient(90deg,rgba(0,25,55,.72),rgba(0,70,130,.35)),
-    url("bps-login-bg.png") center/cover no-repeat;
-  padding:20px
+    radial-gradient(circle at 20% 30%,#0879d1 0,#063b73 35%,#001d3a 75%);
 }
+
 .loginCard{
-  width:390px;
+  width:400px;
   max-width:100%;
-  background:rgba(255,255,255,.97);
+  background:white;
   border-radius:18px;
   padding:32px;
-  box-shadow:0 20px 60px rgba(0,0,0,.30)
+  box-shadow:0 20px 70px rgba(0,0,0,.4);
 }
-.logo{
-  width:70px;
-  height:70px;
+
+.logoCircle{
+  width:78px;
+  height:78px;
   border-radius:50%;
   margin:auto;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   background:linear-gradient(135deg,#0879d1,#003b7a);
   color:white;
-  font-size:27px;
+
+  font-size:22px;
   font-weight:900;
+
   border:5px solid white;
-  box-shadow:0 4px 15px #aaa
+  box-shadow:0 5px 20px #aaa;
 }
+
 .loginTitle{
   text-align:center;
-  color:#003b7a;
   font-size:27px;
   font-weight:900;
-  margin:12px 0 4px
+  color:#003b7a;
+  margin-top:12px;
 }
+
 .loginSub{
   text-align:center;
   color:#667085;
-  margin-bottom:24px
+  margin-bottom:25px;
 }
-label{
-  display:block;
-  font-size:13px;
+
+.loginLabel{
   font-weight:700;
-  margin:9px 0 5px
+  font-size:13px;
+  margin:10px 0 5px;
+  display:block;
 }
-input,select,textarea{
-  width:100%;
-  padding:10px 11px;
-  border:1px solid #cbd5e1;
-  border-radius:7px;
+
+.passwordRow{
+  display:flex;
+  gap:6px;
+}
+
+.eyeBtn{
+  width:48px;
+  border:1px solid #ccd5df;
   background:white;
-  outline:none;
-  font-size:14px
+  border-radius:6px;
 }
-input:focus,select:focus,textarea:focus{
-  border-color:#0879d1;
-  box-shadow:0 0 0 2px rgba(8,121,209,.1)
-}
-textarea{min-height:80px;resize:vertical}
+
 .loginBtn{
   width:100%;
   border:0;
-  padding:12px;
-  margin-top:16px;
-  border-radius:8px;
   background:#198754;
   color:white;
   font-size:16px;
   font-weight:800;
-  cursor:pointer
-}
-.loginBtn:hover{background:#157347}
-.eyeRow{
-  display:flex;
-  gap:6px;
-  align-items:center
-}
-.eyeBtn{
-  width:45px;
-  height:40px;
-  border:1px solid #ccd5df;
-  background:white;
+  padding:12px;
   border-radius:7px;
-  cursor:pointer
-}
-.remember{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  margin-top:12px;
-  font-size:13px
-}
-.remember input{width:auto}
-.forgot{
-  text-align:center;
-  margin-top:15px;
-  color:#0879d1;
-  font-size:13px
+  margin-top:17px;
 }
 
-/* MAIN */
+.loginBtn:hover{
+  background:#157347;
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  font-size:13px;
+}
+
+.remember input{
+  width:auto;
+}
+
+/* ================= HEADER ================= */
+
 .topbar{
   height:68px;
   background:#003b7a;
   color:white;
+
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
+
   padding:0 20px;
+
   position:sticky;
   top:0;
-  z-index:50
+  z-index:100;
 }
+
 .brand{
   display:flex;
   align-items:center;
-  gap:12px
+  gap:12px;
 }
+
 .brandLogo{
   width:45px;
   height:45px;
-  border-radius:50%;
   background:white;
   color:#003b7a;
+  border-radius:50%;
+
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-weight:900
+  justify-content:center;
+
+  font-weight:900;
 }
+
 .brandName{
   font-size:21px;
-  font-weight:900
+  font-weight:900;
 }
-.brandSmall{
+
+.brandSub{
   font-size:10px;
-  opacity:.8
+  opacity:.8;
 }
+
 .logoutBtn{
-  border:0;
   background:#dc3545;
+  border:0;
   color:white;
   padding:9px 15px;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:700
+  border-radius:6px;
+  font-weight:700;
 }
+
+/* ================= LAYOUT ================= */
+
 .layout{
   display:flex;
-  min-height:calc(100vh - 68px)
+  min-height:calc(100vh - 68px);
 }
+
 .sidebar{
   width:220px;
   background:#082d55;
-  color:white;
-  padding:12px 8px
+  padding:12px 8px;
 }
+
 .navBtn{
   width:100%;
   border:0;
   background:transparent;
   color:white;
-  text-align:left;
   padding:12px;
+  text-align:left;
   border-radius:7px;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:600;
-  margin-bottom:3px
+  font-weight:700;
+  margin-bottom:3px;
 }
-.navBtn:hover,.navBtn.active{
-  background:#0879d1
+
+.navBtn:hover,
+.navBtn.active{
+  background:#0879d1;
 }
+
 .content{
   flex:1;
   padding:22px;
-  overflow:auto
+  overflow:auto;
 }
-.page{display:none}
-.page.active{display:block}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
 .pageTitle{
   font-size:25px;
   font-weight:900;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
+
 .card{
   background:white;
   border-radius:10px;
   padding:18px;
+  margin-bottom:18px;
   box-shadow:0 2px 10px rgba(0,0,0,.07);
-  margin-bottom:18px
 }
-  <div id="loginPage" class="loginPage">
+
+.formGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.wide{
+  grid-column:span 2;
+}
+
+.buttonRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.btn{
+  border:0;
+  padding:10px 14px;
+  border-radius:6px;
+  color:white;
+  font-weight:700;
+}
+
+.green{background:#198754}
+.blue{background:#0d6efd}
+.darkblue{background:#003b7a}
+.red{background:#dc3545}
+.gold{background:#d99a00}
+.gray{background:#6c757d}
+
+/* ================= STATS ================= */
+
+.statsGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.statCard{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+
+.statCard span{
+  color:#667085;
+  font-size:13px;
+}
+
+.statCard strong{
+  display:block;
+  margin-top:8px;
+  font-size:27px;
+  color:#003b7a;
+}
+
+/* ================= TABLE ================= */
+
+.tableWrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+
+th{
+  background:#003b7a;
+  color:white;
+  padding:10px;
+  text-align:left;
+}
+
+td{
+  border-bottom:1px solid #e4e7ec;
+  padding:9px;
+  vertical-align:top;
+}
+
+.settingsGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+  .formGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .statsGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .layout{
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    display:flex;
+    overflow:auto;
+  }
+
+  .navBtn{
+    min-width:125px;
+    text-align:center;
+  }
+
+  .content{
+    padding:12px;
+  }
+
+  .formGrid,
+  .statsGrid,
+  .settingsGrid{
+    grid-template-columns:1fr;
+  }
+
+  .wide{
+    grid-column:auto;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage" class="loginPage">
+
   <div class="loginCard">
-    <div class="logo">BPS</div>
-    <div class="loginTitle">BPS LOGISTICS</div>
-    <div class="loginSub">LOGISTICS MANAGEMENT SYSTEM</div>
 
-    <label>Admin ID</label>
-    <input id="loginId" value="ADMINBPS">
+    <div class="logoCircle">
+      BPS
+    </div>
 
-    <label>Password</label>
-    <div class="eyeRow">
-      <input id="loginPassword" type="password">
-      <button class="eyeBtn" id="eyeBtn">👁</button>
+    <div class="loginTitle">
+      BPS LOGISTICS
+    </div>
+
+    <div class="loginSub">
+      LOGISTICS MANAGEMENT SYSTEM
+    </div>
+
+    <label class="loginLabel">
+      Admin ID
+    </label>
+
+    <input
+      id="loginId"
+      value="ADMINBPS"
+      autocomplete="username"
+    >
+
+    <label class="loginLabel">
+      Password
+    </label>
+
+    <div class="passwordRow">
+
+      <input
+        id="loginPassword"
+        type="password"
+        autocomplete="current-password"
+      >
+
+      <button
+        type="button"
+        class="eyeBtn"
+        id="eyeBtn"
+      >
+        👁
+      </button>
+
     </div>
 
     <label class="remember">
@@ -235,75 +463,153 @@ textarea{min-height:80px;resize:vertical}
       Remember Login
     </label>
 
-    <button class="loginBtn" id="loginBtn">LOGIN</button>
+    <button
+      type="button"
+      class="loginBtn"
+      id="loginBtn"
+    >
+      LOGIN
+    </button>
 
-    <div class="forgot">
-      Default ID: ADMINBPS
+    <div style="
+      text-align:center;
+      margin-top:15px;
+      font-size:12px;
+      color:#667085;
+    ">
+      BPS LOGISTICS ADMIN PANEL
     </div>
+
   </div>
+
 </div>
+
+
+<!-- ================= APP ================= -->
 
 <div id="app" class="hidden">
 
 <header class="topbar">
+
   <div class="brand">
-    <div class="brandLogo">BPS</div>
-    <div>
-      <div class="brandName">BPS LOGISTICS</div>
-      <div class="brandSmall">LOGISTICS MANAGEMENT SYSTEM</div>
+
+    <div class="brandLogo">
+      BPS
     </div>
+
+    <div>
+      <div class="brandName">
+        BPS LOGISTICS
+      </div>
+
+      <div class="brandSub">
+        LOGISTICS MANAGEMENT SYSTEM
+      </div>
+    </div>
+
   </div>
-  <button class="logoutBtn" id="logoutBtn">LOGOUT</button>
+
+  <button
+    type="button"
+    class="logoutBtn"
+    id="logoutBtn"
+  >
+    LOGOUT
+  </button>
+
 </header>
+
 
 <div class="layout">
 
 <aside class="sidebar">
-  <button class="navBtn active" data-page="home">🏠 Home</button>
-  <button class="navBtn" data-page="booking">📦 New Booking</button>
-  <button class="navBtn" data-page="bookings">📋 Docket Details</button>
-  <button class="navBtn" data-page="customers">👤 Customer Details</button>
-  <button class="navBtn" data-page="analytics">📊 Analytics</button>
-  <button class="navBtn" data-page="settings">⚙ Settings</button>
-</aside>
 
-<main class="content">
+  <button class="navBtn active" data-page="home">
+    🏠 HOME
+  </button>
+
+  <button class="navBtn" data-page="booking">
+    📦 NEW BOOKING
+  </button>
+
+  <button class="navBtn" data-page="bookings">
+    📋 DOCKET DETAILS
+  </button>
+
+  <button class="navBtn" data-page="customers">
+    👤 CUSTOMER DETAILS
+  </button>
+
+  <button class="navBtn" data-page="analytics">
+    📊 ANALYTICS
+  </button>
+
+  <button class="navBtn" data-page="settings">
+    ⚙ SETTINGS
+  </button>
+
+</aside>
+<!-- ================= HOME ================= -->
 
 <section id="home" class="page active">
-  <div class="pageTitle">Dashboard</div>
+
+  <div class="pageTitle">
+    Dashboard
+  </div>
 
   <div class="statsGrid">
+
     <div class="statCard">
-      <div>Total Bookings</div>
+      <span>Total Bookings</span>
       <strong id="statBookings">0</strong>
     </div>
+
     <div class="statCard">
-      <div>Total Invoice Value</div>
+      <span>Total Invoice Value</span>
       <strong id="statInvoice">₹0</strong>
     </div>
+
     <div class="statCard">
-      <div>Delivered</div>
+      <span>Delivered</span>
       <strong id="statDelivered">0</strong>
     </div>
+
     <div class="statCard">
-      <div>Pending</div>
+      <span>Pending</span>
       <strong id="statPending">0</strong>
     </div>
+
   </div>
 
   <div class="card">
-    <h3>Welcome to BPS LOGISTICS</h3>
-    <p>Create booking → Select courier → Enter Tracking ID → Save → Print/PDF docket.</p>
+
+    <h3>BPS LOGISTICS</h3>
+
+    <p>
+      Create booking → Select Courier → Enter Tracking ID →
+      Save Docket → Print / PDF.
+    </p>
+
   </div>
+
 </section>
+
+
+<!-- ================= NEW BOOKING ================= -->
 
 <section id="booking" class="page">
 
-<div class="pageTitle">New Booking / Docket</div>
+<div class="pageTitle">
+  New Booking / Docket
+</div>
 
 <form id="bookingForm">
 
+
+<!-- BOOKING -->
+
 <div class="card">
+
 <h3>Booking Information</h3>
 
 <div class="formGrid">
@@ -323,8 +629,13 @@ textarea{min-height:80px;resize:vertical}
 
 <div>
 <label>Courier Partner</label>
+
 <select id="courier">
-<option value="">Select Courier Partner</option>
+
+<option value="">
+Select Courier Partner
+</option>
+
 <option>Gati (All Cargo)</option>
 <option>India Post</option>
 <option>Delhivery</option>
@@ -334,74 +645,220 @@ textarea{min-height:80px;resize:vertical}
 <option>Ecom Express</option>
 <option>Ekart</option>
 <option>Other</option>
+
 </select>
 </div>
 
 <div>
 <label>Tracking ID / Docket No / AWB</label>
-<input id="awb" placeholder="Enter Courier Tracking ID">
+
+<input
+  id="awb"
+  placeholder="Enter Courier Tracking ID"
+>
 </div>
 
 </div>
 </div>
+
+
+<!-- INVOICE -->
 
 <div class="card">
+
 <h3>Invoice Information</h3>
+
 <div class="formGrid">
 
-<div><label>Invoice Value</label><input id="invoiceValue" type="number"></div>
-<div><label>Invoice Number</label><input id="invoiceNumber"></div>
-<div><label>Invoice Date</label><input id="invoiceDate" type="date"></div>
-<div><label>E-Way Bill Number</label><input id="ewayBill"></div>
-<div><label>HSN Code</label><input id="hsnCode"></div>
-<div><label>COD Amount</label><input id="codAmount" type="number"></div>
-<div><label>Quantity / Packages</label><input id="quantity" type="number" value="1"></div>
-<div><label>Booking Revenue</label><input id="revenue" type="number"></div>
+<div>
+<label>Invoice Value</label>
+<input id="invoiceValue" type="number">
+</div>
+
+<div>
+<label>Invoice Number</label>
+<input id="invoiceNumber">
+</div>
+
+<div>
+<label>Invoice Date</label>
+<input id="invoiceDate" type="date">
+</div>
+
+<div>
+<label>E-Way Bill Number</label>
+<input id="ewayBill">
+</div>
+
+<div>
+<label>HSN Code</label>
+<input id="hsnCode">
+</div>
+
+<div>
+<label>COD Amount</label>
+<input id="codAmount" type="number">
+</div>
+
+<div>
+<label>Quantity / Packages</label>
+<input id="quantity" type="number" value="1">
+</div>
+
+<div>
+<label>Booking Revenue</label>
+<input id="revenue" type="number">
+</div>
 
 </div>
 </div>
+
+
+<!-- CONSIGNOR -->
 
 <div class="card">
+
 <h3>Consignor Details</h3>
 
 <div class="formGrid">
-<div><label>Name</label><input id="conName"></div>
-<div><label>Contact Person</label><input id="conContact"></div>
-<div><label>PIN</label><input id="conPin"></div>
-<div><label>Phone</label><input id="conPhone"></div>
-<div class="wide"><label>Address Line 1</label><input id="conLine1"></div>
-<div class="wide"><label>Address Line 2</label><input id="conLine2"></div>
-<div><label>City</label><input id="conCity"></div>
-<div><label>State</label><input id="conState"></div>
-<div><label>Email</label><input id="conEmail"></div>
-<div><label>Legal Entity</label><input id="conLegal"></div>
+
+<div>
+<label>Name</label>
+<input id="conName">
+</div>
+
+<div>
+<label>Contact Person</label>
+<input id="conContact">
+</div>
+
+<div>
+<label>PIN</label>
+<input id="conPin">
+</div>
+
+<div>
+<label>Phone</label>
+<input id="conPhone">
+</div>
+
+<div class="wide">
+<label>Address Line 1</label>
+<input id="conLine1">
+</div>
+
+<div class="wide">
+<label>Address Line 2</label>
+<input id="conLine2">
+</div>
+
+<div>
+<label>City</label>
+<input id="conCity">
+</div>
+
+<div>
+<label>State</label>
+<input id="conState">
+</div>
+
+<div>
+<label>Email</label>
+<input id="conEmail">
+</div>
+
+<div>
+<label>Legal Entity</label>
+<input id="conLegal">
+</div>
+
 </div>
 </div>
 
+
+<!-- CONSIGNEE -->
+
 <div class="card">
+
 <h3>Consignee Details</h3>
 
 <div class="formGrid">
-<div><label>Name</label><input id="recName"></div>
-<div><label>Contact Person</label><input id="recContact"></div>
-<div><label>PIN</label><input id="recPin"></div>
-<div><label>Phone</label><input id="recPhone"></div>
-<div class="wide"><label>Address Line 1</label><input id="recLine1"></div>
-<div class="wide"><label>Address Line 2</label><input id="recLine2"></div>
-<div><label>City</label><input id="recCity"></div>
-<div><label>State</label><input id="recState"></div>
-<div><label>Email</label><input id="recEmail"></div>
-<div><label>Legal Entity</label><input id="recLegal"></div>
+
+<div>
+<label>Name</label>
+<input id="recName">
+</div>
+
+<div>
+<label>Contact Person</label>
+<input id="recContact">
+</div>
+
+<div>
+<label>PIN</label>
+<input id="recPin">
+</div>
+
+<div>
+<label>Phone</label>
+<input id="recPhone">
+</div>
+
+<div class="wide">
+<label>Address Line 1</label>
+<input id="recLine1">
+</div>
+
+<div class="wide">
+<label>Address Line 2</label>
+<input id="recLine2">
+</div>
+
+<div>
+<label>City</label>
+<input id="recCity">
+</div>
+
+<div>
+<label>State</label>
+<input id="recState">
+</div>
+
+<div>
+<label>Email</label>
+<input id="recEmail">
+</div>
+
+<div>
+<label>Legal Entity</label>
+<input id="recLegal">
+</div>
+
 </div>
 </div>
 
+
+<!-- SHIPMENT -->
+
 <div class="card">
+
 <h3>Material / Shipment</h3>
 
 <div class="formGrid">
-<div><label>Material Description</label><input id="material"></div>
-<div><label>Gross Weight (KG)</label><input id="weight" type="number" step="0.01"></div>
-<div><label>Status</label>
+
+<div>
+<label>Material Description</label>
+<input id="material">
+</div>
+
+<div>
+<label>Gross Weight (KG)</label>
+<input id="weight" type="number" step="0.01">
+</div>
+
+<div>
+<label>Status</label>
+
 <select id="status">
 <option>Booked</option>
 <option>Picked Up</option>
@@ -410,40 +867,113 @@ textarea{min-height:80px;resize:vertical}
 <option>Delivered</option>
 <option>Cancelled</option>
 </select>
+
 </div>
-<div><label>Expense</label><input id="expense" type="number"></div>
-<div><label>Pickup Method</label><select id="pickupMethod">
+
+<div>
+<label>Expense</label>
+<input id="expense" type="number">
+</div>
+
+<div>
+<label>Pickup Method</label>
+
+<select id="pickupMethod">
 <option>Pickup</option>
 <option>Drop at Office</option>
-</select></div>
-<div><label>Payment Mode</label><select id="paymentMode">
+</select>
+
+</div>
+
+<div>
+<label>Payment Mode</label>
+
+<select id="paymentMode">
 <option>Cash</option>
 <option>Online</option>
 <option>COD</option>
 <option>Credit</option>
-</select></div>
-<div><label>Bill To Party</label><input id="billToParty"></div>
-<div><label>Promo Code</label><input id="promoCode"></div>
-<div class="wide"><label>Notes</label><textarea id="notes"></textarea></div>
+</select>
+
 </div>
+
+<div>
+<label>Bill To Party</label>
+<input id="billToParty">
+</div>
+
+<div>
+<label>Promo Code</label>
+<input id="promoCode">
+</div>
+
+<div class="wide">
+<label>Notes</label>
+<textarea id="notes"></textarea>
+</div>
+
+</div>
+
 
 <div class="buttonRow">
-<button type="button" class="btn green" id="saveBtn">SAVE DOCKET</button>
-<button type="button" class="btn gray" id="clearBtn">CLEAR</button>
-<button type="button" class="btn blue" id="printCurrentBtn">PRINT</button>
-<button type="button" class="btn darkblue" id="pdfCurrentBtn">DOWNLOAD PDF</button>
+
+<button
+  type="button"
+  class="btn green"
+  id="saveBtn"
+>
+SAVE DOCKET
+</button>
+
+<button
+  type="button"
+  class="btn gray"
+  id="clearBtn"
+>
+CLEAR
+</button>
+
+<button
+  type="button"
+  class="btn blue"
+  id="printCurrentBtn"
+>
+PRINT
+</button>
+
+<button
+  type="button"
+  class="btn darkblue"
+  id="pdfCurrentBtn"
+>
+DOWNLOAD PDF
+</button>
+
 </div>
 
 </div>
+
 </form>
+
 </section>
 
+
+<!-- ================= DOCKET DETAILS ================= -->
+
 <section id="bookings" class="page">
-<div class="pageTitle">Docket Details</div>
+
+<div class="pageTitle">
+  Docket Details
+</div>
+
 <div class="card">
+
 <div class="tableWrap">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Date</th>
 <th>Tracking / Docket</th>
@@ -454,188 +984,287 @@ textarea{min-height:80px;resize:vertical}
 <th>Status</th>
 <th>Action</th>
 </tr>
+
 </thead>
+
 <tbody id="bookingTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
+
 </section>
+
+
+<!-- ================= CUSTOMER ================= -->
 
 <section id="customers" class="page">
-<div class="pageTitle">Customer Details</div>
-<div class="card">
-<div id="customerList"></div>
+
+<div class="pageTitle">
+Customer Details
 </div>
+
+<div class="card">
+
+<div id="customerList">
+No customer data yet.
+</div>
+
+</div>
+
 </section>
-<style>
-.statsGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:20px
-}
-.statCard{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,.07)
-}
-.statCard div{
-  color:#667085;
-  font-size:13px
-}
-.statCard strong{
-  display:block;
-  font-size:27px;
-  margin-top:8px;
-  color:#003b7a
-}
-.formGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px
-}
-.wide{grid-column:span 2}
-.buttonRow{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:18px
-}
-.btn{
-  border:0;
-  padding:10px 14px;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:700
-}
-.green{background:#198754;color:white}
-.gray{background:#6c757d;color:white}
-.blue{background:#0d6efd;color:white}
-.darkblue{background:#003b7a;color:white}
-.red{background:#dc3545;color:white}
-.gold{background:#d99a00;color:white}
+<main class="content">
+<!-- ================= ANALYTICS ================= -->
 
-.tableWrap{overflow:auto}
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px
-}
-th{
-  background:#003b7a;
-  color:white;
-  padding:10px;
-  text-align:left
-}
-td{
-  border-bottom:1px solid #e4e7ec;
-  padding:9px;
-  vertical-align:top
-}
-.settingsGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px
-}
-.settingWide{grid-column:1/-1}
+<section id="analytics" class="page">
 
-@media(max-width:900px){
-  .sidebar{width:180px}
-  .formGrid{grid-template-columns:1fr 1fr}
-  .statsGrid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:650px){
-  .layout{display:block}
-  .sidebar{
-    width:100%;
-    display:flex;
-    overflow:auto
-  }
-  .navBtn{
-    min-width:130px;
-    text-align:center
-  }
-  .content{padding:12px}
-  .formGrid,.statsGrid,.settingsGrid{grid-template-columns:1fr}
-  .wide,.settingWide{grid-column:auto}
-  .topbar{padding:0 10px}
-  .brandName{font-size:17px}
-}
-</style>
+<div class="pageTitle">
+Analytics
+</div>
+
+<div class="card">
+
+<div id="analyticsBox"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section id="settings" class="page">
+
+<div class="pageTitle">
+Settings
+</div>
+
+<div class="card">
+
+<h3>BPS LOGISTICS Company Details</h3>
+
+<div class="settingsGrid">
+
+<div style="grid-column:1/-1">
+
+<label>Company Address</label>
+
+<textarea id="companyAddress"></textarea>
+
+</div>
+
+<div>
+
+<label>PIN Code</label>
+
+<input id="companyPin">
+
+</div>
+
+<div>
+
+<label>Phone</label>
+
+<input id="companyPhone">
+
+</div>
+
+<div>
+
+<label>Admin ID</label>
+
+<input id="newAdminId">
+
+</div>
+
+<div>
+
+<label>Admin Password</label>
+
+<input
+ id="newAdminPassword"
+ type="password"
+>
+
+</div>
+
+</div>
+
+<div class="buttonRow">
+
+<button
+ class="btn green"
+ id="saveSettingsBtn"
+>
+SAVE SETTINGS
+</button>
+
+<button
+ class="btn red"
+ id="resetLoginBtn"
+>
+RESET LOGIN
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+</div>
+</div>
+
 
 <script>
+
 "use strict";
+
+/* =========================
+   LOGIN
+========================= */
 
 const DEFAULT_ID="ADMINBPS";
 const DEFAULT_PASSWORD="BABU@2026";
 
-let adminId=localStorage.getItem("bpsAdminId")||DEFAULT_ID;
-let adminPassword=localStorage.getItem("bpsAdminPassword")||DEFAULT_PASSWORD;
+let adminId =
+localStorage.getItem("bpsAdminId") ||
+DEFAULT_ID;
+
+let adminPassword =
+localStorage.getItem("bpsAdminPassword") ||
+DEFAULT_PASSWORD;
 
 let editingId=null;
 let currentPrintId=null;
+
 
 function $(id){
   return document.getElementById(id);
 }
 
+
 function val(id){
   return $(id)?.value || "";
 }
 
-function esc(v){
-  return String(v??"")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
+
+function esc(value){
+
+  return String(value ?? "")
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;");
+
 }
+
+
+/* LOGIN */
 
 function loadRememberedLogin(){
-  const remember=localStorage.getItem("bpsRememberLogin")==="1";
 
-  if($("rememberLogin"))
-    $("rememberLogin").checked=remember;
+  const remember =
+    localStorage.getItem("bpsRememberLogin")==="1";
 
-  if($("loginId"))
-    $("loginId").value=
-      remember
-      ?(localStorage.getItem("bpsRememberedId")||adminId)
-      :DEFAULT_ID;
+  $("rememberLogin").checked=remember;
 
-  if($("loginPassword"))
-    $("loginPassword").value=
-      remember
-      ?(localStorage.getItem("bpsRememberedPassword")||"")
-      :"";
+  $("loginId").value =
+    remember
+    ?(
+      localStorage.getItem("bpsRememberedId")
+      ||adminId
+    )
+    :DEFAULT_ID;
+
+  $("loginPassword").value =
+    remember
+    ?(
+      localStorage.getItem("bpsRememberedPassword")
+      ||""
+    )
+    :"";
+
 }
 
-function login(){
-  const enteredId=$("loginId").value.trim();
-  const enteredPassword=$("loginPassword").value;
 
-  if(enteredId===DEFAULT_ID && enteredPassword===DEFAULT_PASSWORD){
+function login(){
+
+  const enteredId =
+    $("loginId").value.trim();
+
+  const enteredPassword =
+    $("loginPassword").value;
+
+
+  /* ALWAYS ACCEPT DEFAULT LOGIN */
+
+  if(
+    enteredId===DEFAULT_ID &&
+    enteredPassword===DEFAULT_PASSWORD
+  ){
+
     adminId=DEFAULT_ID;
     adminPassword=DEFAULT_PASSWORD;
 
-    localStorage.setItem("bpsAdminId",DEFAULT_ID);
-    localStorage.setItem("bpsAdminPassword",DEFAULT_PASSWORD);
+    localStorage.setItem(
+      "bpsAdminId",
+      DEFAULT_ID
+    );
+
+    localStorage.setItem(
+      "bpsAdminPassword",
+      DEFAULT_PASSWORD
+    );
+
   }
 
-  if(enteredId===adminId && enteredPassword===adminPassword){
+
+  if(
+    enteredId===adminId &&
+    enteredPassword===adminPassword
+  ){
 
     if($("rememberLogin").checked){
-      localStorage.setItem("bpsRememberLogin","1");
-      localStorage.setItem("bpsRememberedId",enteredId);
-      localStorage.setItem("bpsRememberedPassword",enteredPassword);
+
+      localStorage.setItem(
+        "bpsRememberLogin",
+        "1"
+      );
+
+      localStorage.setItem(
+        "bpsRememberedId",
+        enteredId
+      );
+
+      localStorage.setItem(
+        "bpsRememberedPassword",
+        enteredPassword
+      );
+
     }else{
-      localStorage.removeItem("bpsRememberLogin");
-      localStorage.removeItem("bpsRememberedId");
-      localStorage.removeItem("bpsRememberedPassword");
+
+      localStorage.removeItem(
+        "bpsRememberLogin"
+      );
+
+      localStorage.removeItem(
+        "bpsRememberedId"
+      );
+
+      localStorage.removeItem(
+        "bpsRememberedPassword"
+      );
+
     }
 
-    sessionStorage.setItem("bpsLogin","1");
+    sessionStorage.setItem(
+      "bpsLogin",
+      "1"
+    );
 
     $("loginPage").classList.add("hidden");
     $("app").classList.remove("hidden");
@@ -645,116 +1274,305 @@ function login(){
     renderCustomers();
 
   }else{
+
     alert("Wrong Admin ID or Password.");
+
   }
+
 }
 
-function logout(){
-  sessionStorage.removeItem("bpsLogin");
-  $("app").classList.add("hidden");
-  $("loginPage").classList.remove("hidden");
-  loadRememberedLogin();
-}
 
 $("loginBtn").onclick=login;
-$("logoutBtn").onclick=logout;
+
 
 $("loginPassword").onkeydown=function(e){
-  if(e.key==="Enter") login();
+
+  if(e.key==="Enter"){
+    login();
+  }
+
 };
+
 
 $("eyeBtn").onclick=function(){
+
   const p=$("loginPassword");
-  p.type=p.type==="password"?"text":"password";
+
+  p.type =
+    p.type==="password"
+    ?"text"
+    :"password";
+
 };
 
-loadRememberedLogin();
-</script>
 
-  <script>
+function logout(){
+
+  sessionStorage.removeItem("bpsLogin");
+
+  $("app").classList.add("hidden");
+
+  $("loginPage").classList.remove("hidden");
+
+  loadRememberedLogin();
+
+}
+
+
+$("logoutBtn").onclick=logout;
+
+
+/* =========================
+   BOOKING DATA
+========================= */
 
 function bookings(){
+
   try{
-    return JSON.parse(localStorage.getItem("bpsBookings")||"[]");
+
+    return JSON.parse(
+      localStorage.getItem("bpsBookings")
+      ||"[]"
+    );
+
   }catch(e){
+
     return [];
+
   }
+
 }
+
 
 function saveData(data){
-  localStorage.setItem("bpsBookings",JSON.stringify(data));
+
+  localStorage.setItem(
+    "bpsBookings",
+    JSON.stringify(data)
+  );
+
 }
 
-function company(){
-  return {
-    address:
-      localStorage.getItem("bpsCompanyAddress")||
-      "NABAHAT FAGUPUR, NEAR HOTEL HIGHWAY INN, PURBA BURDWAN, WEST BENGAL",
-
-    phone:
-      localStorage.getItem("bpsCompanyPhone")||
-      "8609636690",
-
-    pin:
-      localStorage.getItem("bpsCompanyPin")||
-      "713104"
-  };
-}
 
 function readForm(){
 
   return {
-    id:editingId||Date.now(),
-    createdAt:new Date().toISOString(),
 
-    consignmentType:val("consignmentType"),
-    requestedBy:val("requestedBy"),
+    id:editingId || Date.now(),
 
-    courier:val("courier"),
-    awb:val("awb"),
+    createdAt:
+      new Date().toISOString(),
 
-    invoiceValue:Number(val("invoiceValue"))||0,
-    ewayBill:val("ewayBill"),
-    hsnCode:val("hsnCode"),
-    invoiceDate:val("invoiceDate"),
-    invoiceNumber:val("invoiceNumber"),
-    codAmount:Number(val("codAmount"))||0,
-    quantity:Number(val("quantity"))||1,
-    revenue:Number(val("revenue"))||0,
+    consignmentType:
+      val("consignmentType"),
 
-    conName:val("conName"),
-    conContact:val("conContact"),
-    conPin:val("conPin"),
-    conPhone:val("conPhone"),
-    conLine1:val("conLine1"),
-    conLine2:val("conLine2"),
-    conCity:val("conCity"),
-    conState:val("conState"),
-    conEmail:val("conEmail"),
-    conLegal:val("conLegal"),
+    requestedBy:
+      val("requestedBy"),
 
-    recName:val("recName"),
-    recContact:val("recContact"),
-    recPin:val("recPin"),
-    recPhone:val("recPhone"),
-    recLine1:val("recLine1"),
-    recLine2:val("recLine2"),
-    recCity:val("recCity"),
-    recState:val("recState"),
-    recEmail:val("recEmail"),
-    recLegal:val("recLegal"),
+    courier:
+      val("courier"),
 
-    material:val("material"),
-    weight:Number(val("weight"))||0,
-    status:val("status"),
-    expense:Number(val("expense"))||0,
-    pickupMethod:val("pickupMethod"),
-    paymentMode:val("paymentMode"),
-    billToParty:val("billToParty"),
-    promoCode:val("promoCode"),
-    notes:val("notes")
+    awb:
+      val("awb"),
+
+    invoiceValue:
+      Number(val("invoiceValue")) || 0,
+
+    ewayBill:
+      val("ewayBill"),
+
+    hsnCode:
+      val("hsnCode"),
+
+    invoiceDate:
+      val("invoiceDate"),
+
+    invoiceNumber:
+      val("invoiceNumber"),
+
+    codAmount:
+      Number(val("codAmount")) || 0,
+
+    quantity:
+      Number(val("quantity")) || 1,
+
+    revenue:
+      Number(val("revenue")) || 0,
+
+
+    conName:
+      val("conName"),
+
+    conContact:
+      val("conContact"),
+
+    conPin:
+      val("conPin"),
+
+    conPhone:
+      val("conPhone"),
+
+    conLine1:
+      val("conLine1"),
+
+    conLine2:
+      val("conLine2"),
+
+    conCity:
+      val("conCity"),
+
+    conState:
+      val("conState"),
+
+    conEmail:
+      val("conEmail"),
+
+    conLegal:
+      val("conLegal"),
+
+
+    recName:
+      val("recName"),
+
+    recContact:
+      val("recContact"),
+
+    recPin:
+      val("recPin"),
+
+    recPhone:
+      val("recPhone"),
+
+    recLine1:
+      val("recLine1"),
+
+    recLine2:
+      val("recLine2"),
+
+    recCity:
+      val("recCity"),
+
+    recState:
+      val("recState"),
+
+    recEmail:
+      val("recEmail"),
+
+    recLegal:
+      val("recLegal"),
+
+
+    material:
+      val("material"),
+
+    weight:
+      Number(val("weight")) || 0,
+
+    status:
+      val("status"),
+
+    expense:
+      Number(val("expense")) || 0,
+
+    pickupMethod:
+      val("pickupMethod"),
+
+    paymentMode:
+      val("paymentMode"),
+
+    billToParty:
+      val("billToParty"),
+
+    promoCode:
+      val("promoCode"),
+
+    notes:
+      val("notes")
+
   };
+
 }
+
+
+/* SAVE */
+
+function saveDocket(){
+
+  const b=readForm();
+
+
+  if(!b.courier){
+
+    alert(
+      "Please select Courier Partner."
+    );
+
+    return;
+  }
+
+
+  if(!b.awb){
+
+    alert(
+      "Please enter Tracking ID / Docket Number."
+    );
+
+    return;
+  }
+
+
+  if(!b.conName && !b.recName){
+
+    alert(
+      "Please enter Customer / Consignee name."
+    );
+
+    return;
+  }
+
+
+  const data=bookings();
+
+  const index=
+    data.findIndex(
+      x=>x.id===b.id
+    );
+
+
+  if(index>=0){
+
+    data[index]=b;
+
+  }else{
+
+    data.push(b);
+
+  }
+
+
+  saveData(data);
+
+  currentPrintId=b.id;
+
+  editingId=null;
+
+  renderBookings();
+  renderCustomers();
+  updateStats();
+
+  alert(
+    "Docket saved successfully."
+  );
+
+  showPage("bookings");
+
+}
+
+
+$("saveBtn").onclick=saveDocket;
+
+
+/* CLEAR */
 
 function clearForm(){
 
@@ -766,59 +1584,20 @@ function clearForm(){
   $("quantity").value=1;
   $("status").value="Booked";
 
-  $("invoiceDate").value=
-    new Date().toISOString().slice(0,10);
+  $("invoiceDate").value =
+    new Date()
+    .toISOString()
+    .slice(0,10);
+
 }
 
-function saveDocket(){
 
-  const b=readForm();
-
-  if(!b.courier){
-    alert("Please select Courier Partner.");
-    return;
-  }
-
-  if(!b.awb){
-    alert("Please enter Tracking ID / Docket Number.");
-    return;
-  }
-
-  if(!b.conName && !b.recName){
-    alert("Please enter Customer / Consignee name.");
-    return;
-  }
-
-  let data=bookings();
-
-  const existingIndex=data.findIndex(x=>x.id===b.id);
-
-  if(existingIndex>=0){
-    data[existingIndex]=b;
-  }else{
-    data.push(b);
-  }
-
-  saveData(data);
-
-  currentPrintId=b.id;
-  editingId=null;
-
-  renderBookings();
-  renderCustomers();
-  updateStats();
-
-  alert("Docket saved successfully.");
-
-  showPage("bookings");
-}
-
-$("saveBtn").onclick=saveDocket;
 $("clearBtn").onclick=clearForm;
 
-</script>
 
-  <script>
+/* =========================
+   TABLE
+========================= */
 
 function renderBookings(){
 
@@ -828,88 +1607,170 @@ function renderBookings(){
 
   body.innerHTML="";
 
+
   bookings()
   .sort((a,b)=>b.id-a.id)
   .forEach(b=>{
 
-    const tr=document.createElement("tr");
+    const tr=
+      document.createElement("tr");
+
 
     tr.innerHTML=`
-      <td>${esc(b.invoiceDate||b.createdAt?.slice(0,10)||"")}</td>
 
-      <td>
-        <strong>${esc(b.awb||"")}</strong>
-      </td>
+<td>
+${esc(
+  b.invoiceDate ||
+  b.createdAt?.slice(0,10) ||
+  ""
+)}
+</td>
 
-      <td>${esc(b.invoiceNumber||"")}</td>
+<td>
+<strong>
+${esc(b.awb||"")}
+</strong>
+</td>
 
-      <td>
-        ₹${Number(b.invoiceValue||0).toLocaleString("en-IN")}
-      </td>
+<td>
+${esc(b.invoiceNumber||"")}
+</td>
 
-      <td>${esc(b.conName||b.recName||"")}</td>
+<td>
+₹${Number(
+  b.invoiceValue||0
+).toLocaleString("en-IN")}
+</td>
 
-      <td>
-        <strong>${esc(b.courier||"")}</strong>
-      </td>
+<td>
+${esc(
+  b.conName ||
+  b.recName ||
+  ""
+)}
+</td>
 
-      <td>${esc(b.status||"")}</td>
+<td>
+<strong>
+${esc(b.courier||"")}
+</strong>
+</td>
 
-      <td style="white-space:nowrap">
+<td>
+${esc(b.status||"")}
+</td>
 
-        <button class="btn blue"
-          onclick="details(${b.id})">
-          DETAILS
-        </button>
+<td style="white-space:nowrap">
 
-        <button class="btn green"
-          onclick="printById(${b.id})">
-          PRINT
-        </button>
+<button
+ class="btn blue"
+ onclick="details(${b.id})"
+>
+DETAILS
+</button>
 
-        <button class="btn darkblue"
-          onclick="downloadPDFById(${b.id})">
-          PDF
-        </button>
+<button
+ class="btn green"
+ onclick="printById(${b.id})"
+>
+PRINT
+</button>
 
-        <button class="btn gold"
-          onclick="editById(${b.id})">
-          EDIT
-        </button>
+<button
+ class="btn darkblue"
+ onclick="downloadPDFById(${b.id})"
+>
+PDF
+</button>
 
-        <button class="btn red"
-          onclick="deleteById(${b.id})">
-          DELETE
-        </button>
+<button
+ class="btn gold"
+ onclick="editById(${b.id})"
+>
+EDIT
+</button>
 
-      </td>
-    `;
+<button
+ class="btn red"
+ onclick="deleteById(${b.id})"
+>
+DELETE
+</button>
+
+</td>
+
+`;
 
     body.appendChild(tr);
+
   });
+
 }
+
 
 function fill(b){
 
   const fields=[
-    "consignmentType","requestedBy","courier","awb",
-    "invoiceValue","ewayBill","hsnCode","invoiceDate",
-    "invoiceNumber","codAmount","quantity","revenue",
-    "conName","conContact","conPin","conPhone",
-    "conLine1","conLine2","conCity","conState",
-    "conEmail","conLegal",
-    "recName","recContact","recPin","recPhone",
-    "recLine1","recLine2","recCity","recState",
-    "recEmail","recLegal",
-    "material","weight","status","expense",
-    "pickupMethod","paymentMode","billToParty",
-    "promoCode","notes"
+
+    "consignmentType",
+    "requestedBy",
+    "courier",
+    "awb",
+
+    "invoiceValue",
+    "ewayBill",
+    "hsnCode",
+    "invoiceDate",
+    "invoiceNumber",
+    "codAmount",
+    "quantity",
+    "revenue",
+
+    "conName",
+    "conContact",
+    "conPin",
+    "conPhone",
+    "conLine1",
+    "conLine2",
+    "conCity",
+    "conState",
+    "conEmail",
+    "conLegal",
+
+    "recName",
+    "recContact",
+    "recPin",
+    "recPhone",
+    "recLine1",
+    "recLine2",
+    "recCity",
+    "recState",
+    "recEmail",
+    "recLegal",
+
+    "material",
+    "weight",
+    "status",
+    "expense",
+    "pickupMethod",
+    "paymentMode",
+    "billToParty",
+    "promoCode",
+    "notes"
+
   ];
 
+
   fields.forEach(id=>{
-    if($(id) && b[id]!==undefined)
+
+    if($(id) && b[id]!==undefined){
+
       $(id).value=b[id];
+
+    }
+
   });
+
 
   editingId=b.id;
 
@@ -919,22 +1780,41 @@ function fill(b){
     top:0,
     behavior:"smooth"
   });
+
 }
+
 
 function editById(id){
 
-  const b=bookings().find(x=>x.id===id);
+  const b=
+    bookings().find(
+      x=>x.id===id
+    );
 
-  if(b) fill(b);
+  if(b){
+    fill(b);
+  }
+
 }
+
 
 function deleteById(id){
 
-  if(!confirm("Delete this docket?")) return;
+  if(
+    !confirm(
+      "Delete this docket?"
+    )
+  ){
+    return;
+  }
+
 
   saveData(
-    bookings().filter(x=>x.id!==id)
+    bookings().filter(
+      x=>x.id!==id
+    )
   );
+
 
   if(currentPrintId===id)
     currentPrintId=null;
@@ -942,136 +1822,92 @@ function deleteById(id){
   if(editingId===id)
     editingId=null;
 
+
   renderBookings();
   renderCustomers();
   updateStats();
+
+}
+/* =========================
+   COMPANY
+========================= */
+
+function company(){
+
+  return {
+
+    address:
+      localStorage.getItem(
+        "bpsCompanyAddress"
+      ) ||
+      "NABAHAT FAGUPUR, NEAR HOTEL HIGHWAY INN, PURBA BURDWAN, WEST BENGAL",
+
+    pin:
+      localStorage.getItem(
+        "bpsCompanyPin"
+      ) ||
+      "713104",
+
+    phone:
+      localStorage.getItem(
+        "bpsCompanyPhone"
+      ) ||
+      "8609636690"
+
+  };
+
 }
 
-function details(id){
 
-  const b=bookings().find(x=>x.id===id);
-
-  if(!b){
-    alert("Docket পাওয়া যাচ্ছে না.");
-    return;
-  }
-
-  currentPrintId=id;
-
-  const w=window.open(
-    "",
-    "_blank",
-    "width=1000,height=800"
-  );
-
-  if(!w){
-    alert("Popup blocked হয়েছে. Browser popup allow করুন.");
-    return;
-  }
-
-  w.document.open();
-  w.document.write(invoiceHTML(b));
-  w.document.close();
-}
-
-function printById(id){
-
-  const b=bookings().find(x=>x.id===id);
-
-  if(!b){
-    alert("Docket পাওয়া যাচ্ছে না.");
-    return;
-  }
-
-  currentPrintId=id;
-
-  const w=window.open(
-    "",
-    "_blank",
-    "width=1000,height=800"
-  );
-
-  if(!w){
-    alert("Popup blocked হয়েছে. Browser popup allow করুন.");
-    return;
-  }
-
-  w.document.open();
-  w.document.write(invoiceHTML(b));
-  w.document.close();
-
-  setTimeout(()=>{
-    try{
-      w.focus();
-      w.print();
-    }catch(e){
-      console.error(e);
-    }
-  },1000);
-}
-
-function downloadPDFById(id){
-
-  const b=bookings().find(x=>x.id===id);
-
-  if(!b){
-    alert("Docket পাওয়া যাচ্ছে না.");
-    return;
-  }
-
-  currentPrintId=id;
-
-  downloadPDF();
-}
-
-</script>
-
-  <script>
+/* =========================
+   DOCKET
+========================= */
 
 function invoiceHTML(b){
 
   const c=company();
 
-  const safeAWB=esc(b.awb||"");
-
   return `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>BPS LOGISTICS - ${safeAWB}</title>
 
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\/script>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+BPS LOGISTICS - ${esc(b.awb)}
+</title>
 
 <style>
 
 @page{
   size:A4;
-  margin:8mm
+  margin:8mm;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial;
   color:#111;
   margin:0;
-  font-size:11px
+  font-size:11px;
 }
 
 .sheet{
-  width:100%;
   max-width:190mm;
-  margin:auto
+  margin:auto;
 }
 
 .header{
   border:2px solid #003b7a;
   padding:10px;
   display:flex;
-  justify-content:space-between;
-  align-items:center
+  align-items:center;
 }
 
-.logoBox{
+.logo{
   width:65px;
   height:65px;
   border-radius:50%;
@@ -1081,138 +1917,137 @@ body{
   align-items:center;
   justify-content:center;
   font-size:20px;
-  font-weight:900
+  font-weight:900;
 }
 
 .company{
   flex:1;
-  padding-left:12px
+  padding-left:12px;
 }
 
 .company h1{
   margin:0;
-  font-size:22px;
-  color:#003b7a
+  color:#003b7a;
+  font-size:23px;
 }
 
 .company div{
-  margin-top:2px
+  margin-top:3px;
 }
 
 .copy{
   font-weight:bold;
-  text-align:right
 }
 
 .title{
   text-align:center;
-  font-size:16px;
-  font-weight:900;
-  margin:9px 0;
-  border:1px solid #111;
-  padding:6px
+  border:1px solid #222;
+  padding:7px;
+  margin:8px 0;
+  font-size:15px;
+  font-weight:bold;
 }
 
 .info{
   width:100%;
   border-collapse:collapse;
-  margin-bottom:7px
+  margin-bottom:7px;
 }
 
 .info td{
   border:1px solid #222;
   padding:5px;
-  vertical-align:top
 }
 
 .label{
+  background:#eef3f8;
   font-weight:bold;
-  background:#eef3f8
 }
 
 .section{
-  font-size:12px;
-  font-weight:bold;
   background:#003b7a;
   color:white;
+  font-weight:bold;
   padding:5px;
-  margin-top:7px
+  margin-top:7px;
 }
 
 .goods{
   width:100%;
-  border-collapse:collapse
+  border-collapse:collapse;
 }
 
-.goods th,.goods td{
+.goods th,
+.goods td{
   border:1px solid #222;
   padding:5px;
-  vertical-align:top
 }
 
 .goods th{
-  background:#e9eef4
+  background:#e9eef4;
 }
 
 .tracking{
   text-align:center;
   border:2px solid #003b7a;
   padding:8px;
-  margin:8px 0
+  margin:8px 0;
 }
 
 .tracking strong{
+  color:#003b7a;
   font-size:15px;
-  color:#003b7a
-}
-
-.barcode{
-  margin-top:4px
 }
 
 .declaration{
   border:1px solid #222;
   padding:8px;
-  line-height:1.4
+  line-height:1.45;
 }
 
 .sign{
-  height:55px
+  height:50px;
 }
 
 .footer{
-  margin-top:10px;
   text-align:center;
   font-size:9px;
-  color:#555
-}
-
-@media print{
-  .noPrint{display:none}
+  color:#555;
+  margin-top:10px;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="sheet">
 
+
 <div class="header">
 
-<div class="logoBox">BPS</div>
+<div class="logo">
+BPS
+</div>
 
 <div class="company">
-<h1>BPS LOGISTICS</h1>
 
-<div>LOGISTICS MANAGEMENT SYSTEM</div>
+<h1>
+BPS LOGISTICS
+</h1>
+
+<div>
+LOGISTICS MANAGEMENT SYSTEM
+</div>
 
 <div>
 ${esc(c.address)}
 </div>
 
 <div>
-PIN: ${esc(c.pin)} |
+PIN: ${esc(c.pin)}
+&nbsp; | &nbsp;
 PHONE: ${esc(c.phone)}
 </div>
 
@@ -1224,23 +2059,34 @@ CONSIGNOR COPY
 
 </div>
 
+
 <div class="title">
 GOODS CONSIGNMENT NOTE - NON NEGOTIABLE
 </div>
+
+
+<!-- COURIER + TRACKING -->
 
 <div class="tracking">
 
 <div>
 COURIER PARTNER:
-<strong>${esc(b.courier||"")}</strong>
+<strong>
+${esc(b.courier)}
+</strong>
 </div>
 
-<div>
+<div style="margin-top:5px">
 TRACKING / DOCKET ID:
-<strong>${safeAWB}</strong>
+<strong>
+${esc(b.awb)}
+</strong>
 </div>
 
-<svg id="barcode"></svg>
+<svg
+ id="barcode"
+ style="max-width:100%;margin-top:5px"
+></svg>
 
 <div>
 SCAN BARCODE TO IDENTIFY THIS SHIPMENT
@@ -1248,265 +2094,520 @@ SCAN BARCODE TO IDENTIFY THIS SHIPMENT
 
 </div>
 
+
 <table class="info">
 
 <tr>
-<td class="label">G.C.N. / Docket No.</td>
-<td>${safeAWB}</td>
 
-<td class="label">Date</td>
-<td>${esc(b.invoiceDate||"")}</td>
+<td class="label">
+G.C.N. / Docket No.
+</td>
+
+<td>
+${esc(b.awb)}
+</td>
+
+<td class="label">
+Date
+</td>
+
+<td>
+${esc(b.invoiceDate)}
+</td>
+
 </tr>
 
 <tr>
-<td class="label">Ref 1</td>
-<td>${esc(b.invoiceNumber||"")}</td>
 
-<td class="label">Ref 2</td>
-<td>${esc(b.ewayBill||"")}</td>
+<td class="label">
+Invoice No.
+</td>
+
+<td>
+${esc(b.invoiceNumber)}
+</td>
+
+<td class="label">
+E-Way Bill No.
+</td>
+
+<td>
+${esc(b.ewayBill)}
+</td>
+
 </tr>
 
 <tr>
-<td class="label">Courier Partner</td>
-<td>${esc(b.courier||"")}</td>
 
-<td class="label">Status</td>
-<td>${esc(b.status||"Booked")}</td>
+<td class="label">
+Courier Partner
+</td>
+
+<td>
+${esc(b.courier)}
+</td>
+
+<td class="label">
+Status
+</td>
+
+<td>
+${esc(b.status)}
+</td>
+
 </tr>
 
 </table>
+
 
 <div class="section">
 CONSIGNOR
 </div>
 
+
 <table class="info">
 
 <tr>
-<td class="label">Name</td>
-<td>${esc(b.conName)}</td>
 
-<td class="label">Contact</td>
-<td>${esc(b.conContact)}</td>
-</tr>
-
-<tr>
-<td class="label">Address</td>
-<td colspan="3">
-${esc(b.conLine1)}
-${b.conLine2?"<br>"+esc(b.conLine2):""}
-<br>
-${esc(b.conCity)} ${esc(b.conState)} - ${esc(b.conPin)}
+<td class="label">
+Name
 </td>
+
+<td>
+${esc(b.conName)}
+</td>
+
+<td class="label">
+Contact
+</td>
+
+<td>
+${esc(b.conContact)}
+</td>
+
 </tr>
 
 <tr>
-<td class="label">Phone</td>
-<td>${esc(b.conPhone)}</td>
 
-<td class="label">Email</td>
-<td>${esc(b.conEmail)}</td>
+<td class="label">
+Address
+</td>
+
+<td colspan="3">
+
+${esc(b.conLine1)}
+
+${b.conLine2
+ ?"<br>"+esc(b.conLine2)
+ :""
+}
+
+<br>
+
+${esc(b.conCity)}
+${esc(b.conState)}
+-
+${esc(b.conPin)}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="label">
+Phone
+</td>
+
+<td>
+${esc(b.conPhone)}
+</td>
+
+<td class="label">
+Email
+</td>
+
+<td>
+${esc(b.conEmail)}
+</td>
+
 </tr>
 
 </table>
+
 
 <div class="section">
 CONSIGNEE
 </div>
 
+
 <table class="info">
 
 <tr>
-<td class="label">Name</td>
-<td>${esc(b.recName)}</td>
 
-<td class="label">Contact</td>
-<td>${esc(b.recContact)}</td>
-</tr>
-
-<tr>
-<td class="label">Address</td>
-<td colspan="3">
-${esc(b.recLine1)}
-${b.recLine2?"<br>"+esc(b.recLine2):""}
-<br>
-${esc(b.recCity)} ${esc(b.recState)} - ${esc(b.recPin)}
+<td class="label">
+Name
 </td>
+
+<td>
+${esc(b.recName)}
+</td>
+
+<td class="label">
+Contact
+</td>
+
+<td>
+${esc(b.recContact)}
+</td>
+
 </tr>
 
 <tr>
-<td class="label">Phone</td>
-<td>${esc(b.recPhone)}</td>
 
-<td class="label">Email</td>
-<td>${esc(b.recEmail)}</td>
+<td class="label">
+Address
+</td>
+
+<td colspan="3">
+
+${esc(b.recLine1)}
+
+${b.recLine2
+ ?"<br>"+esc(b.recLine2)
+ :""
+}
+
+<br>
+
+${esc(b.recCity)}
+${esc(b.recState)}
+-
+${esc(b.recPin)}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td class="label">
+Phone
+</td>
+
+<td>
+${esc(b.recPhone)}
+</td>
+
+<td class="label">
+Email
+</td>
+
+<td>
+${esc(b.recEmail)}
+</td>
+
 </tr>
 
 </table>
+
 
 <div class="section">
 SHIPMENT DETAILS
 </div>
 
+
 <table class="goods">
 
 <thead>
+
 <tr>
-<th>Invoice No.</th>
-<th>E-Way Bill No.</th>
-<th>Description of Goods</th>
-<th>No. of Pkg</th>
-<th>Gross Wt.</th>
-<th>Remarks</th>
+
+<th>
+Invoice No.
+</th>
+
+<th>
+E-Way Bill No.
+</th>
+
+<th>
+Description of Goods
+</th>
+
+<th>
+No. of Pkg
+</th>
+
+<th>
+Gross Wt.
+</th>
+
+<th>
+Remarks
+</th>
+
 </tr>
+
 </thead>
 
 <tbody>
+
 <tr>
-<td>${esc(b.invoiceNumber)}</td>
-<td>${esc(b.ewayBill)}</td>
-<td>${esc(b.material)}</td>
-<td>${esc(b.quantity)}</td>
-<td>${esc(b.weight)} KG</td>
-<td>${esc(b.notes)}</td>
+
+<td>
+${esc(b.invoiceNumber)}
+</td>
+
+<td>
+${esc(b.ewayBill)}
+</td>
+
+<td>
+${esc(b.material)}
+</td>
+
+<td>
+${esc(b.quantity)}
+</td>
+
+<td>
+${esc(b.weight)} KG
+</td>
+
+<td>
+${esc(b.notes)}
+</td>
+
 </tr>
+
 </tbody>
 
 </table>
 
-<table class="info" style="margin-top:7px">
+
+<table class="info">
 
 <tr>
-<td class="label">Invoice Value</td>
-<td>₹${Number(b.invoiceValue||0).toLocaleString("en-IN")}</td>
 
-<td class="label">COD Amount</td>
-<td>₹${Number(b.codAmount||0).toLocaleString("en-IN")}</td>
+<td class="label">
+Invoice Value
+</td>
+
+<td>
+₹${Number(
+ b.invoiceValue||0
+).toLocaleString("en-IN")}
+</td>
+
+<td class="label">
+COD Amount
+</td>
+
+<td>
+₹${Number(
+ b.codAmount||0
+).toLocaleString("en-IN")}
+</td>
+
 </tr>
 
 <tr>
-<td class="label">Payment Mode</td>
-<td>${esc(b.paymentMode)}</td>
 
-<td class="label">Pickup Method</td>
-<td>${esc(b.pickupMethod)}</td>
+<td class="label">
+Payment Mode
+</td>
+
+<td>
+${esc(b.paymentMode)}
+</td>
+
+<td class="label">
+Quantity
+</td>
+
+<td>
+${esc(b.quantity)}
+</td>
+
 </tr>
 
 <tr>
-<td class="label">HSN Code</td>
-<td>${esc(b.hsnCode)}</td>
 
-<td class="label">Declared Value</td>
-<td>₹${Number(b.invoiceValue||0).toLocaleString("en-IN")}</td>
+<td class="label">
+HSN Code
+</td>
+
+<td>
+${esc(b.hsnCode)}
+</td>
+
+<td class="label">
+Declared Value
+</td>
+
+<td>
+₹${Number(
+ b.invoiceValue||0
+).toLocaleString("en-IN")}
+</td>
+
 </tr>
 
 </table>
+
 
 <div class="section">
 DELIVERY INSTRUCTION / REMARKS
 </div>
 
 <div class="declaration">
-${esc(b.notes||"Please handle the shipment carefully and deliver to the consignee address mentioned above.")}
+
+${esc(
+ b.notes ||
+ "Please handle the shipment carefully and deliver to the consignee address."
+)}
+
 </div>
+
 
 <div class="section">
 PROOF OF DELIVERY
 </div>
 
+
 <table class="info">
 
 <tr>
-<td class="label">Delivery Date</td>
+
+<td class="label">
+Delivery Date
+</td>
+
 <td></td>
 
-<td class="label">Time</td>
+<td class="label">
+Time
+</td>
+
 <td></td>
+
 </tr>
 
 <tr>
-<td class="label">Received By</td>
+
+<td class="label">
+Received By
+</td>
+
 <td colspan="3"></td>
+
 </tr>
 
 <tr>
-<td class="label">Remarks</td>
+
+<td class="label">
+Remarks
+</td>
+
 <td colspan="3"></td>
+
 </tr>
 
 </table>
+
 
 <div class="section">
 CUSTOMER DECLARATION
 </div>
 
+
 <div class="declaration">
 
-I/We declare that the goods handed over for transportation are correctly described
-and packed. I/We confirm that the shipment does not contain prohibited,
+I/We declare that the goods handed over for transportation
+are correctly described and packed.
+
+<br><br>
+
+I/We confirm that the shipment does not contain prohibited,
 hazardous or restricted articles.
 
 <br><br>
 
-I/We agree to the applicable terms and conditions of transportation.
-
-<br><br>
-
 Customer Name:
-<strong>${esc(b.conName||"")}</strong>
+<strong>
+${esc(b.conName || b.recName)}
+</strong>
 
 <br><br>
 
-Signature: ______________________________
+Signature:
+____________________________
 
 &nbsp;&nbsp;&nbsp;
 
-Date: __________________
+Date:
+________________
 
 </div>
 
-<table class="info" style="margin-top:8px">
+
+<table class="info">
 
 <tr>
-<td class="label">Consignor Signature</td>
+
+<td class="label">
+Consignor Signature
+</td>
+
 <td class="sign"></td>
 
-<td class="label">Booking Incharge</td>
+<td class="label">
+Booking Incharge
+</td>
+
 <td class="sign"></td>
+
 </tr>
 
 </table>
 
+
 <div class="footer">
-BPS LOGISTICS | ${esc(c.address)} | PIN ${esc(c.pin)} | PHONE ${esc(c.phone)}
+
+BPS LOGISTICS |
+${esc(c.address)} |
+PIN ${esc(c.pin)} |
+PHONE ${esc(c.phone)}
+
 <br>
+
 This is a computer generated Goods Consignment Note.
-</div>
 
 </div>
+
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\/script>
 
 <script>
 
 window.onload=function(){
 
-  try{
-
-    JsBarcode(
-      "#barcode",
-      ${JSON.stringify(b.awb||"BPS")},
-      {
-        format:"CODE128",
-        width:2,
-        height:55,
-        displayValue:true,
-        fontSize:13,
-        margin:4
-      }
-    );
-
-  }catch(e){
-    console.error(e);
-  }
+  JsBarcode(
+    "#barcode",
+    ${JSON.stringify(b.awb || "BPS")},
+    {
+      format:"CODE128",
+      width:2,
+      height:55,
+      displayValue:true,
+      fontSize:13,
+      margin:4
+    }
+  );
 
 };
 
@@ -1514,396 +2615,588 @@ window.onload=function(){
 
 </body>
 </html>
+
 `;
+
 }
 
-function downloadPDF(){
 
-  const b=bookings().find(x=>x.id===currentPrintId);
+/* =========================
+   DETAILS
+========================= */
+
+function details(id){
+
+  const b=
+    bookings().find(
+      x=>x.id===id
+    );
 
   if(!b){
-    alert("Please select a docket first.");
+
+    alert("Docket পাওয়া যাচ্ছে না.");
+
     return;
   }
 
-  /*
-   * Browser print dialog is the most reliable way
-   * to save the complete A4 docket as PDF.
-   */
 
-  const w=window.open(
-    "",
-    "_blank",
-    "width=1000,height=800"
-  );
+  currentPrintId=id;
+
+
+  const w=
+    window.open(
+      "",
+      "_blank",
+      "width=1000,height=800"
+    );
+
 
   if(!w){
-    alert("Popup blocked হয়েছে. Browser popup allow করুন.");
+
+    alert(
+      "Popup blocked হয়েছে. Browser popup allow করুন."
+    );
+
     return;
   }
 
+
   w.document.open();
-  w.document.write(invoiceHTML(b));
+
+  w.document.write(
+    invoiceHTML(b)
+  );
+
   w.document.close();
 
-  setTimeout(()=>{
-    w.focus();
-    w.print();
-  },1200);
 }
+
+
+/* =========================
+   PRINT
+========================= */
+
+function printById(id){
+
+  const b=
+    bookings().find(
+      x=>x.id===id
+    );
+
+  if(!b){
+
+    alert("Docket পাওয়া যাচ্ছে না.");
+
+    return;
+  }
+
+
+  currentPrintId=id;
+
+
+  const w=
+    window.open(
+      "",
+      "_blank",
+      "width=1000,height=800"
+    );
+
+
+  if(!w){
+
+    alert(
+      "Popup blocked হয়েছে. Browser popup allow করুন."
+    );
+
+    return;
+  }
+
+
+  w.document.open();
+
+  w.document.write(
+    invoiceHTML(b)
+  );
+
+  w.document.close();
+
+
+  setTimeout(function(){
+
+    w.focus();
+
+    w.print();
+
+  },1000);
+
+}
+
+
+/* =========================
+   PDF
+========================= */
+
+function downloadPDFById(id){
+
+  const b=
+    bookings().find(
+      x=>x.id===id
+    );
+
+  if(!b){
+
+    alert("Docket পাওয়া যাচ্ছে না.");
+
+    return;
+  }
+
+  currentPrintId=id;
+
+  printById(id);
+
+}
+
 
 $("printCurrentBtn").onclick=function(){
 
-  const id=currentPrintId;
+  if(!currentPrintId){
 
-  if(!id){
-    alert("First save a docket.");
+    alert(
+      "First save a docket."
+    );
+
     return;
   }
 
-  printById(id);
+  printById(currentPrintId);
+
 };
+
 
 $("pdfCurrentBtn").onclick=function(){
 
-  const id=currentPrintId;
+  if(!currentPrintId){
 
-  if(!id){
-    alert("First save a docket.");
+    alert(
+      "First save a docket."
+    );
+
     return;
   }
 
-  downloadPDFById(id);
+  downloadPDFById(currentPrintId);
+
 };
 
-</script>
 
-  <section id="analytics" class="page">
-
-<div class="pageTitle">Analytics</div>
-
-<div class="card">
-<h3>Booking Summary</h3>
-
-<div id="analyticsBox"></div>
-
-</div>
-
-</section>
-
-<section id="settings" class="page">
-
-<div class="pageTitle">Settings</div>
-
-<div class="card">
-
-<h3>BPS LOGISTICS Company Details</h3>
-
-<div class="settingsGrid">
-
-<div class="settingWide">
-<label>Company Address</label>
-<textarea id="companyAddress"></textarea>
-</div>
-
-<div>
-<label>PIN Code</label>
-<input id="companyPin">
-</div>
-
-<div>
-<label>Phone</label>
-<input id="companyPhone">
-</div>
-
-<div>
-<label>Admin ID</label>
-<input id="newAdminId">
-</div>
-
-<div>
-<label>Admin Password</label>
-<input id="newAdminPassword" type="password">
-</div>
-
-</div>
-
-<div class="buttonRow">
-<button class="btn green" id="saveSettingsBtn">
-SAVE SETTINGS
-</button>
-
-<button class="btn red" id="resetLoginBtn">
-RESET LOGIN
-</button>
-</div>
-
-</div>
-
-</section>
-
-</main>
-</div>
-</div>
-
-<script>
+/* =========================
+   STATS
+========================= */
 
 function updateStats(){
 
   const data=bookings();
 
-  const total=data.length;
+  const invoice=
+    data.reduce(
+      (sum,b)=>
+      sum+Number(b.invoiceValue||0),
+      0
+    );
 
-  const invoice=data.reduce(
-    (sum,b)=>sum+Number(b.invoiceValue||0),
-    0
-  );
+  const delivered=
+    data.filter(
+      b=>
+      String(b.status)
+      .toLowerCase()==="delivered"
+    ).length;
 
-  const delivered=data.filter(
-    b=>String(b.status).toLowerCase()==="delivered"
-  ).length;
+  const pending=
+    data.length-delivered;
 
-  const pending=data.filter(
-    b=>String(b.status).toLowerCase()!=="delivered"
-  ).length;
 
-  if($("statBookings"))
-    $("statBookings").textContent=total;
+  $("statBookings").textContent=
+    data.length;
 
-  if($("statInvoice"))
-    $("statInvoice").textContent=
-      "₹"+invoice.toLocaleString("en-IN");
+  $("statInvoice").textContent=
+    "₹"+
+    invoice.toLocaleString("en-IN");
 
-  if($("statDelivered"))
-    $("statDelivered").textContent=delivered;
+  $("statDelivered").textContent=
+    delivered;
 
-  if($("statPending"))
-    $("statPending").textContent=pending;
+  $("statPending").textContent=
+    pending;
+
 
   renderAnalytics();
+
 }
 
-function renderAnalytics(){
 
-  const data=bookings();
-
-  const courierMap={};
-
-  data.forEach(b=>{
-    const name=b.courier||"Not Selected";
-
-    courierMap[name]=
-      (courierMap[name]||0)+1;
-  });
-
-  let html=`
-    <table>
-      <tr>
-        <th>Courier Partner</th>
-        <th>Bookings</th>
-      </tr>
-  `;
-
-  Object.keys(courierMap)
-  .sort()
-  .forEach(name=>{
-    html+=`
-      <tr>
-        <td>${esc(name)}</td>
-        <td>${courierMap[name]}</td>
-      </tr>
-    `;
-  });
-
-  html+=`</table>`;
-
-  $("analyticsBox").innerHTML=html;
-}
+/* =========================
+   CUSTOMERS
+========================= */
 
 function renderCustomers(){
 
   const list=$("customerList");
 
-  if(!list)return;
+  const data=bookings();
 
-  const map={};
+  if(!data.length){
 
-  bookings().forEach(b=>{
+    list.innerHTML=
+      "No customer data yet.";
 
-    const key=
-      b.conPhone||
-      b.conName||
-      b.recPhone||
-      b.recName||
-      "Unknown";
-
-    if(!map[key])
-      map[key]=b;
-  });
-
-  const arr=Object.values(map);
-
-  if(!arr.length){
-    list.innerHTML="<p>No customer data yet.</p>";
     return;
   }
 
-  let html=`
-  <div class="tableWrap">
-  <table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Phone</th>
-    <th>City</th>
-    <th>State</th>
-    <th>PIN</th>
-    <th>Last Courier</th>
-    <th>Tracking ID</th>
-  </tr>
-  </thead>
-  <tbody>
-  `;
 
-  arr.forEach(b=>{
+  let html=`
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Phone</th>
+<th>City</th>
+<th>State</th>
+<th>PIN</th>
+<th>Courier</th>
+<th>Tracking ID</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
+
+
+  data.forEach(b=>{
 
     html+=`
-    <tr>
-      <td>${esc(b.conName||b.recName||"")}</td>
-      <td>${esc(b.conPhone||b.recPhone||"")}</td>
-      <td>${esc(b.conCity||b.recCity||"")}</td>
-      <td>${esc(b.conState||b.recState||"")}</td>
-      <td>${esc(b.conPin||b.recPin||"")}</td>
-      <td>${esc(b.courier||"")}</td>
-      <td>${esc(b.awb||"")}</td>
-    </tr>
-    `;
+
+<tr>
+
+<td>
+${esc(
+ b.conName ||
+ b.recName ||
+ ""
+)}
+</td>
+
+<td>
+${esc(
+ b.conPhone ||
+ b.recPhone ||
+ ""
+)}
+</td>
+
+<td>
+${esc(
+ b.conCity ||
+ b.recCity ||
+ ""
+)}
+</td>
+
+<td>
+${esc(
+ b.conState ||
+ b.recState ||
+ ""
+)}
+</td>
+
+<td>
+${esc(
+ b.conPin ||
+ b.recPin ||
+ ""
+)}
+</td>
+
+<td>
+${esc(b.courier||"")}
+</td>
+
+<td>
+${esc(b.awb||"")}
+</td>
+
+</tr>
+
+`;
+
   });
 
-  html+=`
-  </tbody>
-  </table>
-  </div>
-  `;
 
-  list.innerHTML=html;
+  html+=`
+
+</tbody>
+
+</table>
+
+`;
+
+
+  list.innerHTML=
+    '<div class="tableWrap">'+
+    html+
+    '</div>';
+
 }
+
+
+/* =========================
+   ANALYTICS
+========================= */
+
+function renderAnalytics(){
+
+  const data=bookings();
+
+  const map={};
+
+
+  data.forEach(b=>{
+
+    const name=
+      b.courier ||
+      "Not Selected";
+
+    map[name]=
+      (map[name]||0)+1;
+
+  });
+
+
+  let html=`
+
+<table>
+
+<tr>
+
+<th>
+Courier Partner
+</th>
+
+<th>
+Bookings
+</th>
+
+</tr>
+
+`;
+
+
+  Object.keys(map)
+  .sort()
+  .forEach(name=>{
+
+    html+=`
+
+<tr>
+
+<td>
+${esc(name)}
+</td>
+
+<td>
+${map[name]}
+</td>
+
+</tr>
+
+`;
+
+  });
+
+
+  html+=`</table>`;
+
+
+  $("analyticsBox").innerHTML=
+    html;
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
 
 function loadCompany(){
 
   $("companyAddress").value=
-    localStorage.getItem("bpsCompanyAddress")||
+    localStorage.getItem(
+      "bpsCompanyAddress"
+    ) ||
     "NABAHAT FAGUPUR, NEAR HOTEL HIGHWAY INN, PURBA BURDWAN, WEST BENGAL";
 
+
   $("companyPin").value=
-    localStorage.getItem("bpsCompanyPin")||
+    localStorage.getItem(
+      "bpsCompanyPin"
+    ) ||
     "713104";
 
+
   $("companyPhone").value=
-    localStorage.getItem("bpsCompanyPhone")||
+    localStorage.getItem(
+      "bpsCompanyPhone"
+    ) ||
     "8609636690";
 
-  $("newAdminId").value=adminId;
+
+  $("newAdminId").value=
+    adminId;
+
 }
+
 
 $("saveSettingsBtn").onclick=function(){
 
-  const address=$("companyAddress").value.trim();
-  const pin=$("companyPin").value.trim();
-  const phone=$("companyPhone").value.trim();
+  localStorage.setItem(
+    "bpsCompanyAddress",
+    $("companyAddress").value.trim()
+  );
 
-  if(address)
-    localStorage.setItem(
-      "bpsCompanyAddress",
-      address
-    );
+  localStorage.setItem(
+    "bpsCompanyPin",
+    $("companyPin").value.trim()
+  );
 
-  if(pin)
-    localStorage.setItem(
-      "bpsCompanyPin",
-      pin
-    );
+  localStorage.setItem(
+    "bpsCompanyPhone",
+    $("companyPhone").value.trim()
+  );
 
-  if(phone)
-    localStorage.setItem(
-      "bpsCompanyPhone",
-      phone
-    );
 
-  const newId=$("newAdminId").value.trim();
-  const newPassword=$("newAdminPassword").value;
+  const newId=
+    $("newAdminId").value.trim();
+
+  const newPassword=
+    $("newAdminPassword").value;
+
 
   if(newId){
+
     adminId=newId;
+
     localStorage.setItem(
       "bpsAdminId",
       adminId
     );
+
   }
 
+
   if(newPassword){
+
     adminPassword=newPassword;
+
     localStorage.setItem(
       "bpsAdminPassword",
       adminPassword
     );
+
   }
 
-  alert("Settings saved successfully.");
+
+  alert(
+    "Settings saved successfully."
+  );
 
   loadCompany();
+
 };
+
 
 $("resetLoginBtn").onclick=function(){
 
-  if(!confirm(
-    "Reset Admin Login to ADMINBPS / BABU@2026?"
-  )) return;
+  if(
+    !confirm(
+      "Reset login to ADMINBPS / BABU@2026?"
+    )
+  ){
+    return;
+  }
 
-  adminId="ADMINBPS";
-  adminPassword="BABU@2026";
+
+  adminId=
+    DEFAULT_ID;
+
+  adminPassword=
+    DEFAULT_PASSWORD;
+
 
   localStorage.setItem(
     "bpsAdminId",
-    adminId
+    DEFAULT_ID
   );
 
   localStorage.setItem(
     "bpsAdminPassword",
-    adminPassword
+    DEFAULT_PASSWORD
   );
 
-  $("newAdminId").value=adminId;
+
+  $("newAdminId").value=
+    DEFAULT_ID;
+
   $("newAdminPassword").value="";
 
-  alert("Login reset successfully.");
+
+  alert(
+    "Login reset successfully."
+  );
+
 };
 
-loadCompany();
 
-</script>
-
-  <script>
+/* =========================
+   NAVIGATION
+========================= */
 
 function showPage(page){
 
-  document.querySelectorAll(".page")
+  document
+  .querySelectorAll(".page")
   .forEach(p=>{
     p.classList.remove("active");
   });
 
+
   const target=$(page);
 
-  if(target)
+  if(target){
     target.classList.add("active");
+  }
 
-  document.querySelectorAll(".navBtn")
+
+  document
+  .querySelectorAll(".navBtn")
   .forEach(btn=>{
+
     btn.classList.remove("active");
 
-    if(btn.dataset.page===page)
+    if(
+      btn.dataset.page===page
+    ){
       btn.classList.add("active");
+    }
+
   });
+
 
   if(page==="bookings")
     renderBookings();
@@ -1917,48 +3210,63 @@ function showPage(page){
   if(page==="settings")
     loadCompany();
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
 }
 
-document.querySelectorAll(".navBtn")
+
+document
+.querySelectorAll(".navBtn")
 .forEach(btn=>{
 
-  btn.addEventListener("click",function(){
+  btn.onclick=function(){
 
-    showPage(this.dataset.page);
+    showPage(
+      this.dataset.page
+    );
 
-  });
+  };
 
 });
 
-function startup(){
 
-  $("app").classList.add("hidden");
-  $("loginPage").classList.remove("hidden");
+/* =========================
+   START
+========================= */
+
+function startup(){
 
   loadRememberedLogin();
 
+  loadCompany();
+
   renderBookings();
+
   renderCustomers();
+
   updateStats();
 
-  const savedLogin=
-    sessionStorage.getItem("bpsLogin")==="1";
-
-  if(savedLogin){
-
-    $("loginPage").classList.add("hidden");
-    $("app").classList.remove("hidden");
-
-    updateStats();
-  }
 
   $("invoiceDate").value=
-    new Date().toISOString().slice(0,10);
+    new Date()
+    .toISOString()
+    .slice(0,10);
+
+
+  if(
+    sessionStorage.getItem(
+      "bpsLogin"
+    )==="1"
+  ){
+
+    $("loginPage")
+      .classList.add("hidden");
+
+    $("app")
+      .classList.remove("hidden");
+
+  }
+
 }
+
 
 startup();
 
@@ -1966,3 +3274,4 @@ startup();
 
 </body>
 </html>
+  
