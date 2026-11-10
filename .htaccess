@@ -1,0 +1,7 @@
+Options -Indexes
+<Files "config.php">
+  Require all denied
+</Files>
+<Files "README-BANGLA.txt">
+  Require all denied
+</Files>
